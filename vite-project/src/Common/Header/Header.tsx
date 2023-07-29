@@ -4,8 +4,10 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "./Header.css";
+import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
+  const navigate = useNavigate();
   return (
     <div>
       {" "}
@@ -26,7 +28,11 @@ export const Header = () => {
               <Button variant="outline-dark">Search</Button>
             </Form>
             <Nav className="d-flex" style={{ maxHeight: "100px" }} navbarScroll>
-              <Button className="mx-2 mt-2" variant="outline-dark">
+              <Button
+                className="mx-2 mt-2"
+                variant="outline-dark"
+                onClick={() => navigate("/login")}
+              >
                 Login
               </Button>
               <Button className="mx-2 mt-2" variant="outline-dark">
