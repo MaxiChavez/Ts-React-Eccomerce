@@ -2,8 +2,19 @@
   height: auto;
   width: 22em !important;
   padding: 1em;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+.card:hover {
+  transform: scale(1.05); /* Aumenta la escala al 105% en el hover */
+  transition: transform 0.3s ease; /* Agrega una transición suave de 0.3 segundos */
 }
 
 .card-section {
-  width: 100%;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
 }

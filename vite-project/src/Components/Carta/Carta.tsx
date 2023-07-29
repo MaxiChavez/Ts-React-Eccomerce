@@ -12,7 +12,10 @@ interface CardProps {
 
 function CartaProducto(productos: CardProps) {
   return (
-    <Card style={{ width: "15rem" }}>
+    <Card
+      className="shadow border rounded-5 text-center hover"
+      style={{ width: "15rem" }}
+    >
       <Card.Img variant="top" src={productos.image} />
       <Card.Body>
         <Card.Title>{productos.title}</Card.Title>
