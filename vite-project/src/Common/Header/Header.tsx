@@ -3,49 +3,36 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import "./Heacer.css";
+import "./Header.css";
 
-const Header = () => {
+export const Header = () => {
   return (
     <div>
-      <Navbar expand="lg" className="bg-body-tertiary custom-header">
-        <Container>
-          <Navbar.Brand href="#" className="fw-bold fs-4">
-            FashionPalace
+      {" "}
+      <Navbar id="navbar" expand="lg" className="bg-secondary">
+        <Container fluid>
+          <Navbar.Brand className="mx-2" href="#">
+            FallaBella
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Toggle aria-controls="navbarScroll" className="mx-2" />
           <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="md-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
-              <Nav.Link href="#action1">Home</Nav.Link>
-              <Nav.Link href="#action2">Link</Nav.Link>
-              <NavDropdown title="Link" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">
-                  Something else here
-                </NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link href="#" disabled>
-                Link
-              </Nav.Link>
-            </Nav>
-            <Form className="d-flex">
+            <Form className="d-flex mx-2 mx-auto mt-2 ">
               <Form.Control
                 type="search"
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-success">Search</Button>
+              <Button variant="outline-dark">Search</Button>
             </Form>
+            <Nav className="d-flex" style={{ maxHeight: "100px" }} navbarScroll>
+              <Button className="mx-2 mt-2" variant="outline-dark">
+                Login
+              </Button>
+              <Button className="mx-2 mt-2" variant="outline-dark">
+                Sign up
+              </Button>
+            </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>

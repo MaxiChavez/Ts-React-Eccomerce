@@ -1,0 +1,9 @@
+.card {
+  height: auto;
+  width: 22em !important;
+  padding: 1em;
+}
+
+.card-section {
+  width: 100%;
+}
