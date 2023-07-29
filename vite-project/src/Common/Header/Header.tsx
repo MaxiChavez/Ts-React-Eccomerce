@@ -8,12 +8,13 @@ import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const navigate = useNavigate();
+
   return (
     <div>
       {" "}
       <Navbar id="navbar" expand="lg" className="bg-secondary">
         <Container fluid>
-          <Navbar.Brand className="mx-2" href="#">
+          <Navbar.Brand className="mx-2" onClick={() => navigate("/")}>
             FallaBella
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" className="mx-2" />
@@ -36,7 +37,7 @@ export const Header = () => {
                 Login
               </Button>
               <Button className="mx-2 mt-2" variant="outline-dark">
-                Sign up
+                Cart ( 0 )
               </Button>
             </Nav>
           </Navbar.Collapse>

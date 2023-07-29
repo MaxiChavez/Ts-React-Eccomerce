@@ -25,3 +25,6 @@
 #navbar {
   background-color: #ffffff !important;
 }
+.navbar-brand {
+  cursor: pointer;
+}
