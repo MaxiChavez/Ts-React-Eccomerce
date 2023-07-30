@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./Carta.css";
+import { useNavigate } from "react-router-dom";
 
 interface CardProps {
   id: string;
@@ -11,6 +12,7 @@ interface CardProps {
 }
 
 function CartaProducto(productos: CardProps) {
+  const navigate = useNavigate();
   return (
     <Card
       className="shadow border rounded-5 text-center hover"
@@ -25,7 +27,9 @@ function CartaProducto(productos: CardProps) {
             <p>{productos.price}</p>
           </ul>
         </Card.Text>
-        <Button variant="outline-dark ">Add to Cart</Button>
+        <Button variant="outline-dark" onClick={() => navigate("/detail")}>
+          Detail
+        </Button>
       </Card.Body>
     </Card>
   );
