@@ -47,12 +47,13 @@ const Home = () => {
   return (
     <div>
       <Form.Select
+        id="selectCategories"
         aria-label="Default select example"
         defaultValue={"0"}
         onChange={handleCategoriaChange}
       >
         <option value="0" disabled>
-          categories
+          Categories
         </option>
         {categorias.map((categoria) => (
           <option key={categoria} value={categoria}>
@@ -67,7 +68,7 @@ const Home = () => {
             key={producto.id}
             title={producto.title}
             id={producto.id}
-            category={producto.category}
+            category={producto.category.toUpperCase()}
             description={producto.description}
             price={`Price: $ ${producto.price}`}
             image={producto.image}
