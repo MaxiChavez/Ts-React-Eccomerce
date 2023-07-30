@@ -22,7 +22,7 @@ export const Header = () => {
           <Navbar.Brand className="mx-4 " onClick={() => navigate("/")}>
             FallaBella
           </Navbar.Brand>
-          <NavDropdown
+          {/* <NavDropdown
             title="Dropdown"
             id="basic-nav-dropdown"
             className="text-dark" // Estilos del Dropdown
@@ -36,7 +36,7 @@ export const Header = () => {
             <NavDropdown.Item href="#action/3.3">Jewelery</NavDropdown.Item>
 
             <NavDropdown.Item href="#action/3.4">Electronic</NavDropdown.Item>
-          </NavDropdown>
+          </NavDropdown> */}
           <Navbar.Toggle aria-controls="navbarScroll" className="mx-2" />
           <Navbar.Collapse id="navbarScroll">
             <Form className="d-flex mx-2 mx-auto mt-2 ">

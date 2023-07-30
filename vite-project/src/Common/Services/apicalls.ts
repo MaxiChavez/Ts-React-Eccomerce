@@ -11,7 +11,7 @@ export const fetchProducts = async () => {
 };
 
 export const fetchCategorias = async () => {
-  const response = await axios.get(`${urlBase}categories`);
+  const response = await axios.get(`${urlBase}products/categories`);
   const results = response.data;
 
   console.log("Categorias", results);
