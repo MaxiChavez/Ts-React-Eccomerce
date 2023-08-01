@@ -29,3 +29,7 @@ basic-nav-dropdown {
   padding: 0;
   margin: 0;
 }
+
+#search {
+  margin: 0 auto !important;
+}

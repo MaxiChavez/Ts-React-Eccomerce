@@ -46,7 +46,9 @@ export const Header = () => {
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-dark">Search</Button>
+              <Button id="search" variant="outline-dark">
+                Search
+              </Button>
             </Form>
             <Nav className="d-flex" style={{ maxHeight: "100px" }} navbarScroll>
               <Button

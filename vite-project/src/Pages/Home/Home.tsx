@@ -1,6 +1,7 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import { fetchCategorias, fetchProducts } from "../../Common/Services/apicalls";
 import CartaProducto from "../../Components/Carta/Carta";
+import CartaM from "../../Components/CartaM/CartaM";
 import Form from "react-bootstrap/Form";
 import "./Home.css";
 
@@ -18,10 +19,18 @@ const Home = () => {
   const [productos, setProductos] = useState<Product[]>([]);
   const [categorias, setCategorias] = useState<string[]>([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("0");
-  //handler
+  const [productosBuscados, setProductosBuscados] = useState("");
+
+  //handlers
   const handleCategoriaChange = (event: ChangeEvent<HTMLElement>) => {
     setCategoriaSeleccionada(event.target.value);
   };
+
+  const handleBusquedaChange = (event: ChangeEvent<HTMLElement>) => {
+    setProductosBuscados(event.target.value);
+  };
+
+  //
 
   const productosFiltrados =
     categoriaSeleccionada === "0"
@@ -29,6 +38,14 @@ const Home = () => {
       : productos.filter(
           (producto) => producto.category === categoriaSeleccionada
         );
+
+  const productosFiltradosYbuscados =
+    categoriaSeleccionada === "0" && productosBuscados === ""
+      ? productos
+      : productosFiltrados.filter((producto) =>
+          producto.title.includes(productosBuscados)
+        );
+  console.log("busquedaaaa", productosFiltradosYbuscados);
 
   useEffect(() => {
     const traerLosProductos = async () => {
@@ -61,9 +78,15 @@ const Home = () => {
           </option>
         ))}
       </Form.Select>
+      <Form.Control
+        type="text"
+        placeholder="Search product"
+        value={productosBuscados}
+        onChange={handleBusquedaChange}
+      ></Form.Control>
 
       <div className="card-section">
-        {productosFiltrados.map((producto: Product) => (
+        {productosFiltradosYbuscados.map((producto: Product) => (
           <CartaProducto
             key={producto.id}
             title={producto.title}
