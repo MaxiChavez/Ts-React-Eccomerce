@@ -63,27 +63,33 @@ const Home = () => {
 
   return (
     <div>
-      <Form.Select
-        id="selectCategories"
-        aria-label="Default select example"
-        defaultValue={"0"}
-        onChange={handleCategoriaChange}
-      >
-        <option value="0" disabled>
-          Categories
-        </option>
-        {categorias.map((categoria) => (
-          <option key={categoria} value={categoria}>
-            {categoria}
+      <div className="d-flex justify-content-center align-items-center mb-3">
+        {/* Form.Select */}
+        <Form.Select
+          id="selectCategories"
+          aria-label="Default select example"
+          defaultValue={"0"}
+          onChange={handleCategoriaChange}
+        >
+          <option value="0" disabled>
+            Categories
           </option>
-        ))}
-      </Form.Select>
-      <Form.Control
-        type="text"
-        placeholder="Search product"
-        value={productosBuscados}
-        onChange={handleBusquedaChange}
-      ></Form.Control>
+          {categorias.map((categoria) => (
+            <option key={categoria} value={categoria}>
+              {categoria}
+            </option>
+          ))}
+        </Form.Select>
+
+        {/* Form.Control */}
+        <Form.Control
+          id="search"
+          type="text"
+          placeholder="Search product"
+          value={productosBuscados}
+          onChange={handleBusquedaChange}
+        />
+      </div>
 
       <div className="card-section">
         {productosFiltradosYbuscados.map((producto: Product) => (

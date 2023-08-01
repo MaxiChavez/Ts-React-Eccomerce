@@ -24,3 +24,7 @@ body {
   align-items: center;
   margin: 0 auto;
 }
+#search {
+  width: 15em;
+  margin: 0 auto;
+}
