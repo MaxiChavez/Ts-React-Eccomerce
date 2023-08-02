@@ -1,7 +1,7 @@
 #navbar {
   background-color: #ffffff !important;
-  align-items: center;
-  vertical-align: auto;
+  align-items: baseline !important;
+  vertical-align: middle !important;
 }
 .navbar-brand {
   cursor: pointer;
@@ -20,12 +20,48 @@ basic-nav-dropdown {
 
 #btn-cart {
   width: 6em;
-  height: 1em !important;
+  height: 2.5em !important;
   margin-bottom: 0;
+  padding-bottom: 0;
+  align-items: baseline !important;
+  margin-left: 1px !important;
 }
 
 .mx-4 {
   height: 2.5em;
   padding: 0;
   margin: 0;
+}
+.mt-2 {
+  margin-top: 0.3rem !important;
+}
+
+.form-select {
+  width: 15em !important;
+  align-items: baseline !important;
+}
+#logincart {
+  display: flex;
+  align-items: center;
+}
+.buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 5px !important;
+}
+.d-flex {
+  align-items: baseline !important;
+}
+
+.navbar-expand-lg .navbar-collapse {
+  display: flex !important;
+  flex-basis: auto;
+  align-items: baseline;
+}
+
+#Searchh {
+  display: flex !important;
+  justify-content: center !important;
+  margin: 0;
+  padding: 0;
 }
