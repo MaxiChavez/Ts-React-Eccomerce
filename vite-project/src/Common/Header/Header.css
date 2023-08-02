@@ -25,23 +25,7 @@ basic-nav-dropdown {
 }
 
 .mx-4 {
-  width: 5em;
-  height: 2.3em;
-  padding: 0 !important;
+  height: 2.5em;
+  padding: 0;
   margin: 0;
-}
-
-/* Header.css */
-.navbar-collapse {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-#loginCart {
-  vertical-align: middle !important;
-}
-
-.mt-2 {
-  margin-top: 0 !important;
 }

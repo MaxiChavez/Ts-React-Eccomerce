@@ -1,6 +1,8 @@
 import { useToggle, upperFirst } from "@mantine/hooks";
 import "./Login.css";
+import { addUser, loginUser } from "../../Common/Services/apicalls";
 import { useForm } from "@mantine/form";
+import { ILoginData, IUserData } from "../../Common/Services/IUserInterface";
 import {
   TextInput,
   PasswordInput,
@@ -19,8 +21,51 @@ import {
   TwitterButton,
 } from "../../Components/SocialButtons/SocialButtons";
 
+interface User {
+  name : string,
+  email : string,
+  password : string
+}
+
+
 export function Login(props: PaperProps) {
   const [type, toggle] = useToggle(["login", "register"]);
+  const executeForm =()=>{
+    switch (type) {
+      case "login":
+        let userLogin: ILoginData={
+          username : form.values.email,
+          password: form.values.password,
+        }
+        loginUser(userLogin)
+        console.log(type)
+        
+        break;
+      case "register":
+        let userRegister : IUserData ={
+          email : form.values.email,
+          username: form.values.email,
+          password: form.values.password,
+          name:{
+            firstname : "hola", 
+            lastname:""
+          },
+          address: {
+            city : "España",
+            street : "123",
+            number : 4,
+            zipcode:"1234"
+          },
+          phone: "123456"
+        }
+        addUser(userRegister)
+        console.log(type)
+        break;
+    
+      default:
+        break;
+    }
+  }
   const form = useForm({
     initialValues: {
       email: "",
@@ -40,10 +85,7 @@ export function Login(props: PaperProps) {
 
   return (
     <Paper radius="md" p="xl" withBorder {...props}>
-      <Text size="lg" weight={500}>
-        Welcome to Mantine, {type} with
-      </Text>
-
+      
       <Group grow mb="md" mt="md">
         <GoogleButton radius="xl">Google</GoogleButton>
         <TwitterButton radius="xl">Twitter</TwitterButton>
@@ -51,7 +93,7 @@ export function Login(props: PaperProps) {
 
       <Divider label="Or continue with email" labelPosition="center" my="lg" />
 
-      <form onSubmit={form.onSubmit(() => {})}>
+      <form onSubmit={form.onSubmit(() => executeForm())}>
         <Stack>
           {type === "register" && (
             <TextInput

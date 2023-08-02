@@ -9,6 +9,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
 .card-section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -17,14 +18,4 @@ body {
   margin: 3em;
   align-items: center;
   justify-content: center;
-}
-#selectCategories {
-  margin-top: 1em !important;
-  width: 20em;
-  align-items: center;
-  margin: 0 auto;
-}
-#search {
-  width: 15em;
-  margin: 0 auto;
 }

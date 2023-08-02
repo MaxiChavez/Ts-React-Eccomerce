@@ -1,6 +1,13 @@
+body {
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+}
 .card {
-  height: auto;
-  width: 22em !important;
+  height: 35em !important;
+  width: 20em !important;
   padding: 1em;
   align-items: center;
   justify-content: center;
@@ -14,7 +21,22 @@
 }
 
 .card-section {
-  width: 90%;
+  padding: 5em;
   justify-content: center;
   align-items: center;
+}
+
+.card-img-top {
+  width: 95% !important;
+  height: 55% !important;
+}
+.card-body {
+  padding: 1em !important;
+  margin: 0 !important;
+  align-items: center;
+  justify-content: center;
+  height: 3em !important;
+}
+
+@media screen {
 }
