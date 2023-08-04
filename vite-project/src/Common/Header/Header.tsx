@@ -1,29 +1,57 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import { fetchCategorias } from "../../Common/Services/apicalls";
 import { useLocation } from "react-router-dom";
-
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-
+import { useDebounce } from "use-debounce";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCategory } from "../../redux/categorySlice";
+import CartaProducto from "../../Components/Carta/Carta";
 
 interface Category {
   description: string;
 }
 
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+}
+
+export const fetchProducts = async (searchTerm: string) => {
+  const response = await fetch(`https://fakestoreapi.com/products`);
+  const results: Product[] = await response.json();
+
+  const searchTermLowercase = searchTerm.toLowerCase();
+
+  const filteredResults = results.filter((product) => {
+    return product.title.toLowerCase().includes(searchTermLowercase);
+  });
+
+  return filteredResults;
+};
 export const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [categorias, setCategorias] = useState<string[]>([]);
+  const [search, setSearch] = useState<string>("");
+  const [debouncedSearch] = useDebounce(search, 1000);
+  const [products, setProducts] = useState<Product[]>([]);
 
-  //varuable de estado de el buscador
   const dispatch = useDispatch();
+
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value;
+    console.log("tecla", searchTerm);
+    setSearch(searchTerm);
+  };
 
   const handleCategoriaChange = (event: ChangeEvent<HTMLSelectElement>) => {
     let categoriaSeleccionada: Category = {
@@ -36,8 +64,8 @@ export const Header = () => {
   useEffect(() => {
     const traerLosProductos = async () => {
       try {
-        if (location.pathname == "/") {
-          let categories: string[] = await fetchCategorias();
+        if (location.pathname === "/") {
+          const categories: string[] = await fetchCategorias();
           setCategorias(categories);
         }
       } catch (error) {
@@ -46,6 +74,24 @@ export const Header = () => {
     };
     traerLosProductos();
   }, []);
+
+  useEffect(() => {
+    const searchProducts = async () => {
+      try {
+        if (debouncedSearch) {
+          console.log("buscando:", debouncedSearch);
+          const results: Product[] = await fetchProducts(debouncedSearch);
+          console.log("busqueda", results);
+          setProducts(results);
+        } else {
+          setProducts([]);
+        }
+      } catch (error) {
+        console.log("Error al buscar productos:", error);
+      }
+    };
+    searchProducts();
+  }, [debouncedSearch]);
 
   return (
     <div>
@@ -69,6 +115,8 @@ export const Header = () => {
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"
+                    value={search}
+                    onChange={handleSearchChange}
                   />
                   <Button variant="outline-dark">Search</Button>
                 </Form>
@@ -124,6 +172,22 @@ export const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      {debouncedSearch && products.length > 0 && (
+        <div>
+          {products.map((product) => (
+            <div key={product.id}>
+              <CartaProducto
+                title={product.title}
+                id={product.id}
+                category={product.category}
+                price={`Price: $ ${product.price}`}
+                image={product.image}
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

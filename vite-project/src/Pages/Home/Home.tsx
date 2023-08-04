@@ -11,11 +11,11 @@ interface Product {
   price: string;
   description: string;
   image: string;
-  category: string
+  category: string;
 }
 
 interface Category {
-  description: string
+  description: string;
 }
 
 const Home = () => {
@@ -27,7 +27,9 @@ const Home = () => {
   const productosFiltrados =
     categoryRdx.description === "0" || categoryRdx.description === undefined
       ? productos
-      : productos.filter((producto) => producto.category === categoryRdx.description);
+      : productos.filter(
+          (producto) => producto.category === categoryRdx.description
+        );
 
   useEffect(() => {
     const traerLosProductos = async () => {
