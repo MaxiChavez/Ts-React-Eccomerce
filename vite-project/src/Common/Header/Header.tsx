@@ -128,7 +128,7 @@ export const Header = () => {
                     id="btn-cart"
                     className="mx-4"
                     variant="outline-dark"
-                    onClick={() => setOpen(!open)}
+                    onClick={() => navigate("/cart")}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

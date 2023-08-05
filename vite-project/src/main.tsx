@@ -8,6 +8,7 @@ import { persistStore } from "redux-persist";
 import { Provider } from "react-redux";
 import store from "./redux/store.ts";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./Pages/Cart/Cart.css";
 
 import "./App.css";
 
@@ -17,8 +18,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-      <App />
-    </PersistGate>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

@@ -68,9 +68,9 @@ const useStyles = createStyles((theme) => ({
   image: {
     flex: 1,
 
-    [theme.fn.smallerThan("md")]: {
-      display: "none",
-    },
+    // [theme.fn.smallerThan("md")]: {
+    //   display: "none",
+    // },
   },
 
   highlight: {
@@ -121,12 +121,17 @@ const Detail = () => {
                 radius="xl"
                 size="md"
                 className={classes.control}
+                onClick={() => navigate("/cart")}
               >
                 Add to Cart
               </Button>
             </Group>
           </div>
-          <Image src={detailRdx.article.image} className={classes.image} />
+          <Image
+            id="imagenDetalle"
+            src={detailRdx.article.image}
+            className={classes.image}
+          />
         </div>
       </Container>
     </div>
