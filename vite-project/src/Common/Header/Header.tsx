@@ -23,6 +23,7 @@ export const Header = () => {
   const [categorias, setCategorias] = useState<string[]>([]);
   const [search, setSearch] = useState<string>("");
   const [debouncedSearch] = useDebounce(search, 1000);
+  const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -32,7 +33,7 @@ export const Header = () => {
   };
 
   const handleCategoriaChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    let categoriaSeleccionada: Category = {
+    const categoriaSeleccionada: Category = {
       description: event.target.value,
     };
     dispatch(setCategory({ categorySelected: categoriaSeleccionada }));
@@ -56,7 +57,6 @@ export const Header = () => {
     const searchProducts = async () => {
       try {
         dispatch(addSearch({ search: debouncedSearch }));
-
       } catch (error) {
         console.log("Error al buscar productos:", error);
       }
@@ -124,7 +124,12 @@ export const Header = () => {
                   >
                     Login / Register
                   </Button>
-                  <Button id="btn-cart" className="mx-4" variant="outline-dark">
+                  <Button
+                    id="btn-cart"
+                    className="mx-4"
+                    variant="outline-dark"
+                    onClick={() => setOpen(!open)}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"

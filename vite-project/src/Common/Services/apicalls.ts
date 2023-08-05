@@ -13,14 +13,13 @@ export const fetchCategorias = async () => {
   const response = await axios.get(`${urlBase}products/categories`);
   const results = response.data;
 
-
   return results;
 };
 
 export const fetchProductsBySearch = async (searchTerm: string) => {
   const response = await fetch(`https://fakestoreapi.com/products`);
   const results: IProduct[] = await response.json();
-  const searchTermLowercase :string = searchTerm.search.toLowerCase();
+  const searchTermLowercase: string = searchTerm.search.toLowerCase();
   const filteredResults = results.filter((product) => {
     return product.title.toLowerCase().includes(searchTermLowercase);
   });

@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import { fetchProducts, fetchProductsBySearch } from "../../Common/Services/apicalls";
+import {
+  fetchProducts,
+  fetchProductsBySearch,
+} from "../../Common/Services/apicalls";
 import { useSelector } from "react-redux";
 import CartaProducto from "../../Components/Carta/Carta";
 import { categoryData } from "../../redux/categorySlice";
 
 import "./Home.css";
 import { searchData } from "../../redux/searchSlice";
-
-
 
 interface Category {
   description: string;
@@ -25,17 +26,16 @@ const Home = () => {
     categoryRdx.description === "0" || categoryRdx.description === undefined
       ? productos
       : productos.filter(
-        (producto) => producto.category === categoryRdx.description
-      );
+          (producto) => producto.category === categoryRdx.description
+        );
 
   useEffect(() => {
     const traerLosProductos = async () => {
       try {
         if (searchRdx != "") {
-          setProductos(await fetchProductsBySearch(searchRdx))
-        }
-        else {
-          let data: IProduct[] = await fetchProducts();
+          setProductos(await fetchProductsBySearch(searchRdx));
+        } else {
+          const data: IProduct[] = await fetchProducts();
           setProductos(data);
         }
       } catch (error) {
