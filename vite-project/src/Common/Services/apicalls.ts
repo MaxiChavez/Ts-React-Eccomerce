@@ -1,12 +1,11 @@
 import axios from "axios";
-import { IUserData, ILoginData } from "./IUserInterface";
+
 const urlBase = "https://fakestoreapi.com/";
 const URL = "https://fakestoreapi.com/products/";
 
 export const fetchProducts = async () => {
   const response = await axios.get(URL);
   const results = response.data;
-
   return results;
 };
 
@@ -18,25 +17,15 @@ export const fetchCategorias = async () => {
   return results;
 };
 
-
-export const addUser = async (
-  userData : IUserData) => {
-  axios.post(`${urlBase}users`, userData)
-  .then(response => console.log(response))
-  .catch(error => console.error(error));
+export const fetchProductsBySearch = async (searchTerm: string) => {
+  const response = await fetch(`https://fakestoreapi.com/products`);
+  const results: IProduct[] = await response.json();
+  const searchTermLowercase :string = searchTerm.search.toLowerCase();
+  const filteredResults = results.filter((product) => {
+    return product.title.toLowerCase().includes(searchTermLowercase);
+  });
+  return filteredResults;
 };
-
-
-
-export const loginUser = async (loginData : ILoginData) => {
-  let urlPrueba = `${urlBase}auth/login`
-  console.log(urlPrueba)
-  axios.post(urlPrueba, loginData)
-  .then(response => console.log(response.data))
-  .catch(error => console.error(error));
-};
-
-
 
 // Obtener todos los productos: https://fakestoreapi.com/products
 // Obtener un producto específico por su ID: https://fakestoreapi.com/products/:id

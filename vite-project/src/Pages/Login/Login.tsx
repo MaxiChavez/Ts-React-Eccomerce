@@ -1,12 +1,11 @@
 import { useToggle, upperFirst } from "@mantine/hooks";
 import "./Login.css";
-import { addUser, loginUser } from "../../Common/Services/apicalls";
+import { registerUser, loginUser, existsUser } from "../../Common/Services/userService";
 import { useForm } from "@mantine/form";
 import { ILoginData, IUserData } from "../../Common/Services/IUserInterface";
 import {
   TextInput,
   PasswordInput,
-  Text,
   Paper,
   Group,
   PaperProps,
@@ -21,71 +20,78 @@ import {
   TwitterButton,
 } from "../../Components/SocialButtons/SocialButtons";
 
-interface User {
-  name : string,
-  email : string,
-  password : string
-}
-
-
 export function Login(props: PaperProps) {
   const [type, toggle] = useToggle(["login", "register"]);
-  const executeForm =()=>{
+
+  const executeForm = async () => {
     switch (type) {
       case "login":
-        let userLogin: ILoginData={
-          username : form.values.email,
-          password: form.values.password,
-        }
-        loginUser(userLogin)
-        console.log(type)
-        
-        break;
-      case "register":
-        let userRegister : IUserData ={
-          email : form.values.email,
+        let userLogin: ILoginData = {
           username: form.values.email,
           password: form.values.password,
-          name:{
-            firstname : "hola", 
-            lastname:""
-          },
-          address: {
-            city : "España",
-            street : "123",
-            number : 4,
-            zipcode:"1234"
-          },
-          phone: "123456"
+        };
+        try {
+          await loginUser(userLogin);
+        } catch (error) {
+          console.error("Error al iniciar sesión:", error);
         }
-        addUser(userRegister)
-        console.log(type)
+        console.log(type);
         break;
-    
+      case "register":
+        let userRegister: IUserData = {
+          email: form.values.email,
+          password: form.values.password,
+          name: form.values.name,
+          address: {
+            city: form.values.address.city,
+            street: form.values.address.street,
+            number: form.values.address.number,
+            zipcode: form.values.address.zipcode,
+          },
+          phone: form.values.phone,
+          rol: "u"
+        };
+        try {
+          let existeElUsuario: boolean = await existsUser(form.values.email);
+          if (existeElUsuario) {
+            console.log("El usuario existe, no lo puedo crear.");
+          } else {
+            await registerUser(userRegister);
+          }
+        } catch (error) {
+          console.error("Error al registrar el usuario:", error);
+        }
+        console.log(type);
+        break;
       default:
         break;
     }
-  }
+  };
+
   const form = useForm({
     initialValues: {
       email: "",
       name: "",
       password: "",
+      address: {
+        city: "",
+        street: "",
+        number: "",
+        zipcode: "",
+      },
+      phone: "",
       terms: true,
     },
 
     validate: {
       email: (val) => (/^\S+@\S+$/.test(val) ? null : "Invalid email"),
       password: (val) =>
-        val.length <= 6
-          ? "Password should include at least 6 characters"
-          : null,
+        val.length <= 6 ? "Password should include at least 6 characters" : null,
     },
   });
 
   return (
     <Paper radius="md" p="xl" withBorder {...props}>
-      
       <Group grow mb="md" mt="md">
         <GoogleButton radius="xl">Google</GoogleButton>
         <TwitterButton radius="xl">Twitter</TwitterButton>
@@ -96,15 +102,73 @@ export function Login(props: PaperProps) {
       <form onSubmit={form.onSubmit(() => executeForm())}>
         <Stack>
           {type === "register" && (
-            <TextInput
-              label="Name"
-              placeholder="Your name"
-              value={form.values.name}
-              onChange={(event) =>
-                form.setFieldValue("name", event.currentTarget.value)
-              }
-              radius="md"
-            />
+            <>
+              <TextInput
+                label="Name"
+                placeholder="Your name"
+                value={form.values.name}
+                onChange={(event) =>
+                  form.setFieldValue("name", event.currentTarget.value)
+                }
+                radius="md"
+              />
+              <TextInput
+                required
+                label="City"
+                placeholder="Málaga"
+                value={form.values.address.city}
+                onChange={(event) =>
+                  form.setFieldValue("address.city", event.currentTarget.value)
+                }
+                error={form.errors.address && "Invalid address"}
+                radius="md"
+              />
+              <TextInput
+                required
+                label="Calle"
+                placeholder="Calle 123"
+                value={form.values.address.street}
+                onChange={(event) =>
+                  form.setFieldValue("address.street", event.currentTarget.value)
+                }
+                error={form.errors.address && "Invalid address"}
+                radius="md"
+              />
+              <TextInput
+                required
+                label="Numero"
+                placeholder="1234"
+                value={form.values.address.number}
+                onChange={(event) =>
+                  form.setFieldValue("address.number", event.currentTarget.value)
+                }
+                error={form.errors.address && "Invalid address"}
+                radius="md"
+              />
+              <TextInput
+                required
+                label="Zipcode"
+                placeholder="A1234B"
+                value={form.values.address.zipcode}
+                onChange={(event) =>
+                  form.setFieldValue("address.zipcode", event.currentTarget.value)
+                }
+                error={form.errors.address && "Invalid address"}
+                radius="md"
+              />
+
+              <TextInput
+                required
+                label="Phone"
+                placeholder="1355433462"
+                value={form.values.phone}
+                onChange={(event) =>
+                  form.setFieldValue("phone", event.currentTarget.value)
+                }
+                error={form.errors.phone && "Invalid phone"}
+                radius="md"
+              />
+            </>
           )}
 
           <TextInput

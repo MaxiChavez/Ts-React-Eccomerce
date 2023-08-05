@@ -11,45 +11,23 @@ import "./Header.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCategory } from "../../redux/categorySlice";
-import CartaProducto from "../../Components/Carta/Carta";
+import { addSearch } from "../../redux/searchSlice";
 
 interface Category {
   description: string;
 }
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-}
-
-export const fetchProducts = async (searchTerm: string) => {
-  const response = await fetch(`https://fakestoreapi.com/products`);
-  const results: Product[] = await response.json();
-
-  const searchTermLowercase = searchTerm.toLowerCase();
-
-  const filteredResults = results.filter((product) => {
-    return product.title.toLowerCase().includes(searchTermLowercase);
-  });
-
-  return filteredResults;
-};
 export const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [categorias, setCategorias] = useState<string[]>([]);
   const [search, setSearch] = useState<string>("");
   const [debouncedSearch] = useDebounce(search, 1000);
-  const [products, setProducts] = useState<Product[]>([]);
 
   const dispatch = useDispatch();
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value;
-    console.log("tecla", searchTerm);
     setSearch(searchTerm);
   };
 
@@ -57,7 +35,6 @@ export const Header = () => {
     let categoriaSeleccionada: Category = {
       description: event.target.value,
     };
-
     dispatch(setCategory({ categorySelected: categoriaSeleccionada }));
   };
 
@@ -78,14 +55,8 @@ export const Header = () => {
   useEffect(() => {
     const searchProducts = async () => {
       try {
-        if (debouncedSearch) {
-          console.log("buscando:", debouncedSearch);
-          const results: Product[] = await fetchProducts(debouncedSearch);
-          console.log("busqueda", results);
-          setProducts(results);
-        } else {
-          setProducts([]);
-        }
+        dispatch(addSearch({ search: debouncedSearch }));
+
       } catch (error) {
         console.log("Error al buscar productos:", error);
       }
@@ -151,7 +122,7 @@ export const Header = () => {
                     variant="outline-dark"
                     onClick={() => navigate("/login")}
                   >
-                    Login
+                    Login / Register
                   </Button>
                   <Button id="btn-cart" className="mx-4" variant="outline-dark">
                     <svg
@@ -172,22 +143,6 @@ export const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
-      {debouncedSearch && products.length > 0 && (
-        <div>
-          {products.map((product) => (
-            <div key={product.id}>
-              <CartaProducto
-                title={product.title}
-                id={product.id}
-                category={product.category}
-                price={`Price: $ ${product.price}`}
-                image={product.image}
-              />
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };
