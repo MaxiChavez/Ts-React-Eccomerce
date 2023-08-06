@@ -1,7 +1,9 @@
-import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { detailData } from "../../redux/detailSlice";
+import { cartData } from "../../redux/cartSlice";
+import { addToCart } from "../../redux/cartSlice";
+
 import {
   createStyles,
   Container,
@@ -67,23 +69,30 @@ const useStyles = createStyles((theme) => ({
 
   image: {
     flex: 1,
+    maxWidth: "100%",
+    height: "auto",
 
-    // [theme.fn.smallerThan("md")]: {
-    //   display: "none",
-    // },
-  },
-
-  highlight: {
-    position: "relative",
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.primaryColor,
-    borderRadius: theme.radius.sm,
-    padding: `${rem(4)} ${rem(12)}`,
+    [theme.fn.smallerThan("md")]: {
+      display: "block",
+      margin: "0 auto",
+      maxWidth: "80%",
+    },
   },
 }));
+//////////////solucionar img en moviles ////////////////////
 
 const Detail = () => {
+  //conecto a rdx en modo lectura
   const detailRdx: DetailArticle = useSelector(detailData);
+  const cart = useSelector(cartData);
+  //conecto a rdx en modo escritura
+  const dispatch = useDispatch();
+  //handler para el carrito
+  const addToCartHandler = () => {
+    dispatch(addToCart(detailRdx.article));
+    console.log("se agrego el art al carrito:", detailRdx.article);
+  };
+
   const navigate = useNavigate();
 
   const { classes } = useStyles();
@@ -103,7 +112,7 @@ const Detail = () => {
 
             <List mt={30} spacing="sm" size="sm">
               <List.Item>{detailRdx.article.description}</List.Item>
-              <List.Item> Category: {detailRdx.article.category}</List.Item>
+              <List.Item>Category: {detailRdx.article.category}</List.Item>
               <List.Item>Price: {detailRdx.article.price}</List.Item>
             </List>
 
@@ -121,7 +130,7 @@ const Detail = () => {
                 radius="xl"
                 size="md"
                 className={classes.control}
-                onClick={() => navigate("/cart")}
+                onClick={addToCartHandler}
               >
                 Add to Cart
               </Button>
@@ -130,6 +139,7 @@ const Detail = () => {
           <Image
             id="imagenDetalle"
             src={detailRdx.article.image}
+            alt={detailRdx.article.title}
             className={classes.image}
           />
         </div>

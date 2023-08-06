@@ -139,6 +139,7 @@
 //////////////////
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import {
   MDBBtn,
@@ -405,7 +406,7 @@ export const Cart = () => {
 
                       <MDBBtn
                         color="outline-dark"
-                        onClick={() => navigate("/")} // La función navigate debe estar definida correctamente
+                        onClick={() => navigate("/")}
                       >
                         Volver
                       </MDBBtn>

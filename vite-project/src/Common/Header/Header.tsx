@@ -9,9 +9,10 @@ import Navbar from "react-bootstrap/Navbar";
 import { useDebounce } from "use-debounce";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../../redux/categorySlice";
 import { addSearch } from "../../redux/searchSlice";
+import { cartSlice } from "../../redux/cartSlice";
 
 interface Category {
   description: string;
