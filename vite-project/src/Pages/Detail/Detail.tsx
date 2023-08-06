@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { detailData } from "../../redux/detailSlice";
-import { cartData } from "../../redux/cartSlice";
-import { addToCart } from "../../redux/cartSlice";
+import { cartData, addToCart } from "../../redux/cartSlice";
+import { useEffect } from "react";
 
 import {
   createStyles,
@@ -29,6 +29,15 @@ interface Article {
   description: string;
   image: string;
   category: string;
+}
+interface ProductoCarrito {
+  id: string;
+  title: string;
+  price: string;
+  description: string;
+  image: string;
+  category: string;
+  amount: number;
 }
 
 const useStyles = createStyles((theme) => ({
@@ -82,16 +91,28 @@ const useStyles = createStyles((theme) => ({
 //////////////solucionar img en moviles ////////////////////
 
 const Detail = () => {
-  //conecto a rdx en modo lectura
+  let productoAcargar: ProductoCarrito = {};
+  // //conecto a rdx en modo lectura
   const detailRdx: DetailArticle = useSelector(detailData);
   const cart = useSelector(cartData);
-  //conecto a rdx en modo escritura
+  // //conecto a rdx en modo escritura
   const dispatch = useDispatch();
-  //handler para el carrito
+
   const addToCartHandler = () => {
-    dispatch(addToCart(detailRdx.article));
-    console.log("se agrego el art al carrito:", detailRdx.article);
+    if (detailRdx && detailRdx.article) {
+      dispatch(addToCart(detailRdx.article));
+      console.log("se agrego el art al carrito:", cartData);
+      console.log("Estado del carrito:", cart);
+    }
   };
+  const rdxCartData = useSelector(cartData);
+
+  useEffect(() => {
+    console.log(
+      "soy los datos del carrito venidos directamente de rdx",
+      rdxCartData
+    );
+  }, [rdxCartData]);
 
   const navigate = useNavigate();
 
