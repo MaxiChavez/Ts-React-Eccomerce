@@ -1,6 +1,10 @@
 import { useToggle, upperFirst } from "@mantine/hooks";
 import "./Login.css";
-import { registerUser, loginUser, existsUser } from "../../Common/Services/userService";
+import {
+  registerUser,
+  loginUser,
+  existsUser,
+} from "../../Common/Services/userService";
 import { useForm } from "@mantine/form";
 import { ILoginData, IUserData } from "../../Common/Services/IUserInterface";
 import {
@@ -24,21 +28,26 @@ export function Login(props: PaperProps) {
   const [type, toggle] = useToggle(["login", "register"]);
 
   const executeForm = async () => {
+    let userLogin: ILoginData;
+    let userRegister: IUserData;
     switch (type) {
       case "login":
-        let userLogin: ILoginData = {
+        userLogin = {
           username: form.values.email,
           password: form.values.password,
         };
         try {
-          await loginUser(userLogin);
+          const usuario: IUserData[] = await loginUser(userLogin);
+          if (usuario.length > 0) {
+            console.log("login exitoso");
+          } else console.log("login fallido");
         } catch (error) {
           console.error("Error al iniciar sesión:", error);
         }
         console.log(type);
         break;
       case "register":
-        let userRegister: IUserData = {
+        userRegister = {
           email: form.values.email,
           password: form.values.password,
           name: form.values.name,
@@ -49,10 +58,10 @@ export function Login(props: PaperProps) {
             zipcode: form.values.address.zipcode,
           },
           phone: form.values.phone,
-          rol: "u"
+          rol: "u",
         };
         try {
-          let existeElUsuario: boolean = await existsUser(form.values.email);
+          const existeElUsuario: boolean = await existsUser(form.values.email);
           if (existeElUsuario) {
             console.log("El usuario existe, no lo puedo crear.");
           } else {
@@ -86,7 +95,9 @@ export function Login(props: PaperProps) {
     validate: {
       email: (val) => (/^\S+@\S+$/.test(val) ? null : "Invalid email"),
       password: (val) =>
-        val.length <= 6 ? "Password should include at least 6 characters" : null,
+        val.length <= 6
+          ? "Password should include at least 6 characters"
+          : null,
     },
   });
 
@@ -129,7 +140,10 @@ export function Login(props: PaperProps) {
                 placeholder="Calle 123"
                 value={form.values.address.street}
                 onChange={(event) =>
-                  form.setFieldValue("address.street", event.currentTarget.value)
+                  form.setFieldValue(
+                    "address.street",
+                    event.currentTarget.value
+                  )
                 }
                 error={form.errors.address && "Invalid address"}
                 radius="md"
@@ -140,7 +154,10 @@ export function Login(props: PaperProps) {
                 placeholder="1234"
                 value={form.values.address.number}
                 onChange={(event) =>
-                  form.setFieldValue("address.number", event.currentTarget.value)
+                  form.setFieldValue(
+                    "address.number",
+                    event.currentTarget.value
+                  )
                 }
                 error={form.errors.address && "Invalid address"}
                 radius="md"
@@ -151,7 +168,10 @@ export function Login(props: PaperProps) {
                 placeholder="A1234B"
                 value={form.values.address.zipcode}
                 onChange={(event) =>
-                  form.setFieldValue("address.zipcode", event.currentTarget.value)
+                  form.setFieldValue(
+                    "address.zipcode",
+                    event.currentTarget.value
+                  )
                 }
                 error={form.errors.address && "Invalid address"}
                 radius="md"

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { detailData } from "../../redux/detailSlice";
-import { cartData, addToCart } from "../../redux/cartSlice";
+import { addToCart } from "../../redux/cartSlice";
 
 //mantine
 import {
@@ -46,7 +46,7 @@ const Detail = () => {
 
   // Handler para agregar al carrito
   const addToCartHandler = () => {
-    let articuloACargar: ProductoCarrito = {
+    const articuloACargar: ProductoCarrito = {
       ...detailRdx,
       amount: 1,
     };
