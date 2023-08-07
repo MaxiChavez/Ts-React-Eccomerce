@@ -2,25 +2,18 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { detailData } from "../../redux/detailSlice";
 import { cartData, addToCart } from "../../redux/cartSlice";
-import { useEffect } from "react";
 
+//mantine
 import {
-  createStyles,
   Container,
   Image,
   Title,
   Text,
   List,
-  ThemeIcon,
-  rem,
   Button,
   Group,
 } from "@mantine/core";
-import { IconCheck } from "@tabler/icons-react";
-
-interface DetailArticle {
-  article: Article;
-}
+import useStyles from "./detailStyles";
 
 interface Article {
   id: string;
@@ -40,84 +33,27 @@ interface ProductoCarrito {
   amount: number;
 }
 
-const useStyles = createStyles((theme) => ({
-  inner: {
-    display: "flex",
-    justifyContent: "space-between",
-    paddingTop: `calc(${theme.spacing.xl} * 4)`,
-    paddingBottom: `calc(${theme.spacing.xl} * 4)`,
-  },
-
-  content: {
-    maxWidth: rem(480),
-    marginRight: `calc(${theme.spacing.xl} * 3)`,
-
-    [theme.fn.smallerThan("md")]: {
-      maxWidth: "100%",
-      marginRight: 0,
-    },
-  },
-
-  title: {
-    color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontSize: rem(44),
-    lineHeight: 1.2,
-    fontWeight: 900,
-
-    [theme.fn.smallerThan("xs")]: {
-      fontSize: rem(28),
-    },
-  },
-
-  control: {
-    [theme.fn.smallerThan("xs")]: {
-      flex: 1,
-    },
-  },
-
-  image: {
-    flex: 1,
-    maxWidth: "100%",
-    height: "auto",
-
-    [theme.fn.smallerThan("md")]: {
-      display: "block",
-      margin: "0 auto",
-      maxWidth: "80%",
-    },
-  },
-}));
 //////////////solucionar img en moviles ////////////////////
 
 const Detail = () => {
-  let productoAcargar: ProductoCarrito = {};
-  // //conecto a rdx en modo lectura
-  const detailRdx: DetailArticle = useSelector(detailData);
-  const cart = useSelector(cartData);
-  // //conecto a rdx en modo escritura
-  const dispatch = useDispatch();
-
-  const addToCartHandler = () => {
-    if (detailRdx && detailRdx.article) {
-      dispatch(addToCart(detailRdx.article));
-      console.log("se agrego el art al carrito:", cartData);
-      console.log("Estado del carrito:", cart);
-    }
-  };
-  const rdxCartData = useSelector(cartData);
-
-  useEffect(() => {
-    console.log(
-      "soy los datos del carrito venidos directamente de rdx",
-      rdxCartData
-    );
-  }, [rdxCartData]);
-
+  // Hooks
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const detailRdx: Article = useSelector(detailData).article;
 
+  // Estilos que llevé a ts
   const { classes } = useStyles();
 
+  // Handler para agregar al carrito
+  const addToCartHandler = () => {
+    let articuloACargar: ProductoCarrito = {
+      ...detailRdx,
+      amount: 1,
+    };
+    dispatch(addToCart(articuloACargar));
+  };
+
+  // Si no hay datos de detalle, mostrar mensaje de carga
   if (!detailRdx) {
     return <div>Loading...</div>;
   }
@@ -127,14 +63,14 @@ const Detail = () => {
       <Container>
         <div className={classes.inner}>
           <div className={classes.content}>
-            <Title className={classes.title}>{detailRdx.article.title}</Title>
+            <Title className={classes.title}>{detailRdx.title}</Title>
             <Text color="dimmed" mt="md"></Text>
             <Text mt="md"></Text>
 
             <List mt={30} spacing="sm" size="sm">
-              <List.Item>{detailRdx.article.description}</List.Item>
-              <List.Item>Category: {detailRdx.article.category}</List.Item>
-              <List.Item>Price: {detailRdx.article.price}</List.Item>
+              <List.Item>{detailRdx.description}</List.Item>
+              <List.Item>Category: {detailRdx.category}</List.Item>
+              <List.Item>Price: {detailRdx.price}</List.Item>
             </List>
 
             <Group mt={30}>
@@ -159,8 +95,8 @@ const Detail = () => {
           </div>
           <Image
             id="imagenDetalle"
-            src={detailRdx.article.image}
-            alt={detailRdx.article.title}
+            src={detailRdx.image}
+            alt={detailRdx.title}
             className={classes.image}
           />
         </div>
