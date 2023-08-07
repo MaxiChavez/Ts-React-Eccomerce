@@ -1,17 +1,17 @@
 import axios from "axios";
 import { ILoginData, IUserData } from "./IUserInterface";
-const baseUrl = "http://localhost:3001/";
+const baseUrl = "http://localhost:3000/";
 
-export const loginUser = async (loginData: ILoginData): Promise<IUserData> => {
+export const loginUser = async (loginData: ILoginData): Promise<any> => {
   console.log(loginData);
   const url = `${baseUrl}user?email=${loginData.username}&pass=${loginData.password}`;
-  axios
-    .get(url)
-    .then((response) => {
-      console.log(response.data);
-      return response.data;
-    })
-    .catch((error) => console.error(error));
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 };
 
 export const registerUser = async (userData: IUserData) => {

@@ -23,9 +23,15 @@ import {
   GoogleButton,
   TwitterButton,
 } from "../../Components/SocialButtons/SocialButtons";
+//importo redux
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../../redux/loginSlice";
+import { useNavigate } from "react-router-dom";
 
-export function Login(props: PaperProps) {
+export const Login = (props: PaperProps) => {
   const [type, toggle] = useToggle(["login", "register"]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const executeForm = async () => {
     let userLogin: ILoginData;
@@ -37,10 +43,23 @@ export function Login(props: PaperProps) {
           password: form.values.password,
         };
         try {
-          const usuario: IUserData[] = await loginUser(userLogin);
-          if (usuario.length > 0) {
-            console.log("login exitoso");
-          } else console.log("login fallido");
+          const usuarioLogueado: IUserData[] = await loginUser(userLogin);
+          if (usuarioLogueado.length > 0) {
+            console.log(usuarioLogueado[0]);
+            //PRIMERO GUARDO EL usuarioLogueado[1] EN REDUX:
+            const logedUser = usuarioLogueado[0];
+            dispatch(updateUser(logedUser));
+            console.log(logedUser.email);
+
+            //...//
+
+            //ACA REDIRECCIONO AL HOME:
+            navigate("/");
+
+            //...//
+          } else {
+            console.log("login fallido, el usuario no existe");
+          }
         } catch (error) {
           console.error("Error al iniciar sesión:", error);
         }
@@ -248,4 +267,4 @@ export function Login(props: PaperProps) {
       </form>
     </Paper>
   );
-}
+};

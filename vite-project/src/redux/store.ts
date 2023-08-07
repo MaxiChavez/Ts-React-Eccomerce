@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import categorySlice from "./categorySlice";
 import detailSlice from "./detailSlice";
+import loginSlice from "./loginSlice";
 import searchSlice from "./searchSlice";
 import cartSlice from "./cartSlice";
 import storage from "redux-persist/lib/storage";
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   detail: detailSlice,
   search: searchSlice,
   cart: cartSlice,
+  login: loginSlice,
 });
 
 const persistConfig = {
