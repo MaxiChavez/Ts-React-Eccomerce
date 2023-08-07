@@ -52,7 +52,7 @@ export const Login = (props: PaperProps) => {
             console.log(logedUser.email);
 
             //...//
-
+            dispatch(updateUser({ isLogged: true }));
             //ACA REDIRECCIONO AL HOME:
             navigate("/");
 
