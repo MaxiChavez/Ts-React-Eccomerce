@@ -12,9 +12,11 @@ interface ProductoCarrito {
 
 interface CartState {
   items: ProductoCarrito[];
+  cantidadTotal: number;
 }
 const initialState: CartState = {
   items: [],
+  cantidadTotal: 0,
 };
 
 const cartSlice = createSlice({
@@ -29,9 +31,15 @@ const cartSlice = createSlice({
       } else {
         state.items.push(newItem);
       }
+      state.cantidadTotal += newItem.amount;
     },
+
     removeToCart: (state, action: PayloadAction<ProductoCarrito[]>) => {
       state.items = action.payload;
+      state.cantidadTotal = action.payload.reduce(
+        (total, item) => total + item.amount,
+        0
+      );
     },
   },
 });
@@ -40,5 +48,7 @@ const cartSlice = createSlice({
 export const { addToCart, removeToCart } = cartSlice.actions;
 
 export const cartData = (state: any) => state.cart;
+
+export const cartTotalQuantity = (state: CartState) => state.cantidadTotal;
 
 export default cartSlice.reducer;
