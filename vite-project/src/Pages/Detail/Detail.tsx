@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { detailData } from "../../redux/detailSlice";
 import { addToCart } from "../../redux/cartSlice";
+import { loginData } from "../../redux/loginSlice";
 
 //mantine
 import {
@@ -36,6 +37,8 @@ interface ProductoCarrito {
 //////////////solucionar img en moviles ////////////////////
 
 const Detail = () => {
+  const isLogged = useSelector(loginData).isLogged;
+
   // Hooks
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -46,6 +49,13 @@ const Detail = () => {
 
   // Handler para agregar al carrito
   const addToCartHandler = () => {
+    // if (!isLogged) {
+    //   navigate("/login");
+    //   return;
+    // }
+    !isLogged && navigate("/login");
+    //probando el ternario
+
     const articuloACargar: ProductoCarrito = {
       ...detailRdx,
       amount: 1,
