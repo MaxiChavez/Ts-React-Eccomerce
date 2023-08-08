@@ -19,6 +19,14 @@ const initialState: CartState = {
   cantidadTotal: 0,
 };
 
+const calcularCantidadTotal = (productos: ProductoCarrito[]): number => {
+  let total = 0;
+  productos.forEach((producto) => {
+    total += producto.amount;
+  });
+  return total;
+};
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -31,7 +39,7 @@ const cartSlice = createSlice({
       } else {
         state.items.push(newItem);
       }
-      state.cantidadTotal += newItem.amount;
+      state.cantidadTotal = calcularCantidadTotal(state.items);
     },
 
     removeToCart: (state, action: PayloadAction<ProductoCarrito[]>) => {
@@ -49,6 +57,6 @@ export const { addToCart, removeToCart } = cartSlice.actions;
 
 export const cartData = (state: any) => state.cart;
 
-export const cartTotalQuantity = (state: CartState) => state.cantidadTotal;
+export const cartTotalQuantity = (state: any) => state.cantidadTotal;
 
 export default cartSlice.reducer;

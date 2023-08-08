@@ -1,6 +1,13 @@
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { loginData } from "../../redux/loginSlice";
+import {
+  cartData,
+  addToCart,
+  removeToCart,
+  cartTotalQuantity,
+} from "../../redux/cartSlice";
 
 import {
   MDBBtn,
@@ -17,7 +24,37 @@ import {
   MDBTableHead,
 } from "mdb-react-ui-kit";
 
+interface ProductoCarrito {
+  id: string;
+  title: string;
+  price: string;
+  description: string;
+  image: string;
+  category: string;
+  amount: number;
+}
+
 export const Cart = () => {
+  const dispatch = useDispatch();
+  const isLogged = useSelector(loginData).isLogged;
+  const cartItems = useSelector(cartData).items;
+  const cartQuantity = useSelector(cartTotalQuantity);
+
+  const addToCartHandler = () => {
+    const articuloACargar: ProductoCarrito = {
+      ...detailRdx,
+      amount: 1,
+    };
+    dispatch(addToCart(articuloACargar));
+  };
+  const removeToCartHandler = () => {
+    const articuloACargar: ProductoCarrito = {
+      ...detailRdx,
+      amount: 1,
+    };
+    dispatch(removeToCart(articuloACargar));
+  };
+
   const navigate = useNavigate();
   return (
     <section className="h-100 h-custom">
@@ -36,100 +73,85 @@ export const Cart = () => {
                 </tr>
               </MDBTableHead>
               <MDBTableBody>
-                <tr>
-                  <th scope="row">
-                    <div className="d-flex align-items-center">
-                      <img
-                        src="https://i.imgur.com/2DsA49b.webp"
-                        fluid
-                        className="rounded-3"
-                        style={{ width: "120px" }}
-                        alt="Book"
-                      />
-                      <div className="flex-column ms-4">
-                        <p className="mb-2">Thinking, Fast and Slow</p>
-                        <p className="mb-0">Daniel Kahneman</p>
-                      </div>
-                    </div>
-                  </th>
-                  <td className="align-middle">
-                    <p className="mb-0" style={{ fontWeight: "500" }}>
-                      Digital
-                    </p>
-                  </td>
-                  <td className="align-middle">
-                    <div className="d-flex flex-row align-items-center">
-                      <MDBBtn className="px-2" color="link">
-                        <MDBIcon fas icon="minus" />
-                      </MDBBtn>
-
-                      <MDBInput
-                        min={0}
-                        type="number"
-                        size="sm"
-                        style={{ width: "50px" }}
-                        defaultValue={2}
-                      />
-
-                      <MDBBtn className="px-2" color="link">
-                        <MDBIcon fas icon="plus" />
-                      </MDBBtn>
-                    </div>
-                  </td>
-                  <td className="align-middle">
-                    <p className="mb-0" style={{ fontWeight: "500" }}>
-                      $9.99
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <div className="d-flex align-items-center">
-                      <img
-                        src="https://i.imgur.com/Oj1iQUX.webp"
-                        fluid
-                        className="rounded-3"
-                        style={{ width: "120px" }}
-                        alt="Book"
-                      />
-                      <div className="flex-column ms-4">
-                        <p className="mb-2">
-                          Homo Deus: A Brief History of Tomorrow
+                {cartItems.map((item) => (
+                  <div id={item.id}>
+                    <tr>
+                      <th scope="row">
+                        <div className="d-flex align-items-center">
+                          <img
+                            src={item.image}
+                            fluid
+                            className="rounded-3"
+                            style={{ width: "120px" }}
+                            alt="Book"
+                          />
+                          <div className="flex-column ms-4">
+                            <p className="mb-2">{item.title}</p>
+                            <p className="mb-0">{item.description}</p>
+                          </div>
+                        </div>
+                      </th>
+                      <td className="align-middle">
+                        <p className="mb-0" style={{ fontWeight: "500" }}>
+                          {item.category}
                         </p>
-                        <p className="mb-0">Yuval Noah Harari</p>
-                      </div>
-                    </div>
-                  </th>
-                  <td className="align-middle">
-                    <p className="mb-0" style={{ fontWeight: "500" }}>
-                      Paperback
-                    </p>
-                  </td>
-                  <td className="align-middle">
-                    <div className="d-flex flex-row align-items-center">
-                      <MDBBtn className="px-2" color="link">
-                        <MDBIcon fas icon="minus" />
-                      </MDBBtn>
+                      </td>
+                      <td className="align-middle">
+                        <div className="d-flex flex-row align-items-center">
+                          <MDBBtn
+                            className="px-2"
+                            color="link"
+                            onClick={removeToCartHandler}
+                          >
+                            <MDBIcon fas icon="minus" />
+                          </MDBBtn>
 
-                      <MDBInput
-                        min={0}
-                        type="number"
-                        size="sm"
-                        style={{ width: "50px" }}
-                        defaultValue={1}
-                      />
+                          <MDBInput
+                            min={0}
+                            type="number"
+                            size="sm"
+                            style={{ width: "50px" }}
+                            defaultValue={item.amount}
+                          />
 
-                      <MDBBtn className="px-2" color="link">
-                        <MDBIcon fas icon="plus" />
-                      </MDBBtn>
-                    </div>
-                  </td>
-                  <td className="align-middle">
-                    <p className="mb-0" style={{ fontWeight: "500" }}>
-                      $13.50
-                    </p>
-                  </td>
-                </tr>
+                          <MDBBtn
+                            className="px-2"
+                            color="link"
+                            onClick={removeToCartHandler}
+                          >
+                            <MDBIcon fas icon="plus" />
+                          </MDBBtn>
+                        </div>
+                      </td>
+                      <td className="align-middle">
+                        <p className="mb-0" style={{ fontWeight: "500" }}>
+                          {item.price}
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="align-middle">
+                        <div className="d-flex flex-row align-items-center">
+                          <MDBBtn
+                            className="px-2"
+                            color="link"
+                            onClick={removeToCartHandler}
+                          >
+                            <MDBIcon fas icon="minus" />
+                          </MDBBtn>
+
+                          <MDBBtn
+                            className="px-2"
+                            color="link"
+                            onClick={addToCartHandler}
+                          >
+                            <MDBIcon fas icon="plus" />
+                          </MDBBtn>
+                        </div>
+                      </td>
+                    </tr>
+                  </div>
+                ))}
               </MDBTableBody>
             </MDBTable>
           </MDBCol>
