@@ -5,6 +5,7 @@ import "./App.css";
 import { Login } from "./Pages/Login/Login";
 import Detail from "./Pages/Detail/Detail";
 import { Cart } from "./Pages/Cart/Cart";
+import Footer from "./Common/Footer/Footer";
 
 import { VistaUser } from "./Pages/Usuarios/VistaUser/VistaUser";
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="user" element={<VistaUser />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   );
