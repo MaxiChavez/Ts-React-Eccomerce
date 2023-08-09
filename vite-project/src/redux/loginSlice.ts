@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IUserData } from "../Common/Services/IUserInterface";
 
 export const loginSlice = createSlice({
   name: "login",
   initialState: {
-    user: {},
+    user: {} as IUserData,
     isLogged: false,
   },
   reducers: {

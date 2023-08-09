@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../../redux/categorySlice";
 import { addSearch } from "../../redux/searchSlice";
-import { removeToCart } from "../../redux/cartSlice";
 import { cleanCart } from "../../redux/cartSlice";
 import { estaLogueado, updateUser } from "../../redux/loginSlice";
 import { loginData } from "../../redux/loginSlice";
@@ -25,7 +24,6 @@ interface Category {
 
 export const Header = () => {
   const cantidadTotalCarrito = useSelector(cartTotalQuantity);
-  console.log("Cantidad total", cantidadTotalCarrito)
   const location = useLocation();
   const navigate = useNavigate();
   const [categorias, setCategorias] = useState<string[]>([]);
@@ -36,6 +34,7 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   const userLogRd: IUserData = useSelector(loginData);
+  console.log("userLogRd:", userLogRd);
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value;
@@ -129,7 +128,11 @@ export const Header = () => {
                 >
                   {isLogged ? (
                     <>
-                      <span className="mx-2 mt-2">Hi: {userLogRd.email}</span>
+                      {/* const userLogRd: IUserData = useSelector(loginData); */}
+
+                      <span className="mx-2 mt-2">
+                        Hi: {userLogRd.user.name}
+                      </span>
                       <Button
                         className="mx-2 mt-2"
                         variant="outline-dark"
@@ -137,7 +140,7 @@ export const Header = () => {
                           dispatch(updateUser({ isLogged: false }));
                           dispatch(updateUser({ user: {} }));
                           dispatch(cleanCart());
-                          navigate("/")
+                          navigate("/");
                         }}
                       >
                         Logout

@@ -1,15 +1,18 @@
+export interface IuserDataAdress {
+  city: string;
+  street: string;
+  number: string;
+  zipcode: string;
+}
+
 export interface IUserData {
   name: string;
-  address: {
-    city: string;
-    street: string;
-    number: string;
-    zipcode: string;
-  };
+
   email: string;
   password: string;
   phone: string;
   rol: string;
+  adress: IuserDataAdress;
 }
 
 export interface ILoginData {

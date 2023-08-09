@@ -1,6 +1,6 @@
 import "./Cart.css";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { ProductoCarrito } from "../../Common/Interfaces/Productos";
 
 import {
@@ -17,19 +17,19 @@ import {
   MDBTableBody,
   MDBTableHead,
 } from "mdb-react-ui-kit";
-import { cartData } from "../../redux/cartSlice";
+import { cartData, updateProductAmount, removeProduct } from "../../redux/cartSlice";
 
 export const Cart = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const cartArticlesRdx: ProductoCarrito[] = useSelector(cartData);
 
-  console.log(cartArticlesRdx)
-  const handleInputChange = (id: string, value: string) => {
-    //const newValue = e.target.value;
-    console.log(value)
-    console.log(id)
-
-
+  const handleInputChange = (idProduct: string, value: number) => {
+    dispatch(updateProductAmount({ id: idProduct, newAmount: value }));
+  };
+  const removeElement = (idProduct: string) => {
+    console.log(idProduct)
+    dispatch(removeProduct(idProduct))
   };
 
   return (
@@ -63,6 +63,7 @@ export const Cart = () => {
                           />
                           <div className="flex-column ms-4">
                             <p className="mb-2">{item.title}</p>
+                            <button onClick={() => removeElement(item.id)}>Eliminar</button>
                           </div>
                         </div>
                       </th>
@@ -78,7 +79,7 @@ export const Cart = () => {
                           </MDBBtn>
 
                           <MDBInput
-                            min={0}
+                            min={1}
                             type="number"
                             size="sm"
                             style={{ width: "50px" }}
