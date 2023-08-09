@@ -10,8 +10,6 @@ import store from "./redux/store.ts";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Pages/Cart/Cart.css";
 
-import "./App.css";
-
 const persistor = persistStore(store);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

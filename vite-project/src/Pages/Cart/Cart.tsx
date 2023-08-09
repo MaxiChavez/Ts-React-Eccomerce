@@ -51,6 +51,12 @@ export const Cart = () => {
     dispatch(removeProduct(idProduct));
   };
 
+  // //handler para la ordenDecompra
+  // const HandlerOrdenCompra = (cartArticlesRdx:any) =>{
+  //   const nuevaOrdenCompra = cartArticlesRdx,
+  //   dispatch(nuevaOrdenCompra)
+  // }
+
   return (
     <section className="h-100 h-custom">
       <MDBContainer className="py-5 h-100">
