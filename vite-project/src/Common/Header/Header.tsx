@@ -33,7 +33,7 @@ export const Header = () => {
 
   const dispatch = useDispatch();
 
-  const userLogRd: IUserData = useSelector(loginData);
+  const userLogRd: { user: IUserData } = useSelector(loginData);
   console.log("userLogRd:", userLogRd);
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -128,8 +128,6 @@ export const Header = () => {
                 >
                   {isLogged ? (
                     <>
-                      {/* const userLogRd: IUserData = useSelector(loginData); */}
-
                       <span className="mx-2 mt-2">
                         Hi: {userLogRd.user.name}
                       </span>
