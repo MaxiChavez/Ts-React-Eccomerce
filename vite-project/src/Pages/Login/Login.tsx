@@ -24,7 +24,7 @@ import {
   TwitterButton,
 } from "../../Components/SocialButtons/SocialButtons";
 //importo redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateUser } from "../../redux/loginSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -44,15 +44,15 @@ export const Login = (props: PaperProps) => {
         };
         try {
           const usuarioLogueado: IUserData[] = await loginUser(userLogin);
+          console.log(userLogin)
           if (usuarioLogueado.length > 0) {
             console.log(usuarioLogueado[0]);
             //PRIMERO GUARDO EL usuarioLogueado[1] EN REDUX:
             const logedUser = usuarioLogueado[0];
-            dispatch(updateUser(logedUser));
-            console.log(logedUser.email);
-
-            //...//
+            console.log(logedUser);
+            dispatch(updateUser({ user: logedUser }));
             dispatch(updateUser({ isLogged: true }));
+
             //ACA REDIRECCIONO AL HOME:
             navigate("/");
 

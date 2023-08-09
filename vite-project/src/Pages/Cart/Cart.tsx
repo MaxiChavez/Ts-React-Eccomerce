@@ -1,13 +1,7 @@
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { loginData } from "../../redux/loginSlice";
-import {
-  cartData,
-  addToCart,
-  removeToCart,
-  cartTotalQuantity,
-} from "../../redux/cartSlice";
+import { useSelector } from "react-redux";
+import { ProductoCarrito } from "../../Common/Interfaces/Productos";
 
 import {
   MDBBtn,
@@ -23,39 +17,21 @@ import {
   MDBTableBody,
   MDBTableHead,
 } from "mdb-react-ui-kit";
-
-interface ProductoCarrito {
-  id: string;
-  title: string;
-  price: string;
-  description: string;
-  image: string;
-  category: string;
-  amount: number;
-}
+import { cartData } from "../../redux/cartSlice";
 
 export const Cart = () => {
-  const dispatch = useDispatch();
-  const isLogged = useSelector(loginData).isLogged;
-  const cartItems = useSelector(cartData).items;
-  const cartQuantity = useSelector(cartTotalQuantity);
-
-  const addToCartHandler = () => {
-    const articuloACargar: ProductoCarrito = {
-      ...detailRdx,
-      amount: 1,
-    };
-    dispatch(addToCart(articuloACargar));
-  };
-  const removeToCartHandler = () => {
-    const articuloACargar: ProductoCarrito = {
-      ...detailRdx,
-      amount: 1,
-    };
-    dispatch(removeToCart(articuloACargar));
-  };
-
   const navigate = useNavigate();
+  const cartArticlesRdx: ProductoCarrito[] = useSelector(cartData);
+
+  console.log(cartArticlesRdx)
+  const handleInputChange = (id: string, value: string) => {
+    //const newValue = e.target.value;
+    console.log(value)
+    console.log(id)
+
+
+  };
+
   return (
     <section className="h-100 h-custom">
       <MDBContainer className="py-5 h-100">
@@ -67,14 +43,14 @@ export const Cart = () => {
                   <th scope="col" className="h5">
                     Shopping Bag
                   </th>
-                  <th scope="col">Format</th>
+                  <th scope="col">Category</th>
                   <th scope="col">Quantity</th>
                   <th scope="col">Price</th>
                 </tr>
               </MDBTableHead>
               <MDBTableBody>
-                {cartItems.map((item) => (
-                  <div id={item.id}>
+                {cartArticlesRdx.map((item) => (
+                  <>
                     <tr>
                       <th scope="row">
                         <div className="d-flex align-items-center">
@@ -87,7 +63,6 @@ export const Cart = () => {
                           />
                           <div className="flex-column ms-4">
                             <p className="mb-2">{item.title}</p>
-                            <p className="mb-0">{item.description}</p>
                           </div>
                         </div>
                       </th>
@@ -98,11 +73,7 @@ export const Cart = () => {
                       </td>
                       <td className="align-middle">
                         <div className="d-flex flex-row align-items-center">
-                          <MDBBtn
-                            className="px-2"
-                            color="link"
-                            onClick={removeToCartHandler}
-                          >
+                          <MDBBtn className="px-2" color="link" >
                             <MDBIcon fas icon="minus" />
                           </MDBBtn>
 
@@ -112,13 +83,10 @@ export const Cart = () => {
                             size="sm"
                             style={{ width: "50px" }}
                             defaultValue={item.amount}
+                            onChange={(e) => handleInputChange(item.id, e.target.value)}
                           />
 
-                          <MDBBtn
-                            className="px-2"
-                            color="link"
-                            onClick={removeToCartHandler}
-                          >
+                          <MDBBtn className="px-2" color="link">
                             <MDBIcon fas icon="plus" />
                           </MDBBtn>
                         </div>
@@ -130,28 +98,16 @@ export const Cart = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td className="align-middle">
-                        <div className="d-flex flex-row align-items-center">
-                          <MDBBtn
-                            className="px-2"
-                            color="link"
-                            onClick={removeToCartHandler}
-                          >
-                            <MDBIcon fas icon="minus" />
-                          </MDBBtn>
 
-                          <MDBBtn
-                            className="px-2"
-                            color="link"
-                            onClick={addToCartHandler}
-                          >
-                            <MDBIcon fas icon="plus" />
-                          </MDBBtn>
-                        </div>
-                      </td>
+
+
+
                     </tr>
-                  </div>
+                  </>
+
+
                 ))}
+
               </MDBTableBody>
             </MDBTable>
           </MDBCol>

@@ -20,5 +20,6 @@ export const loginSlice = createSlice({
 export const { updateUser } = loginSlice.actions;
 
 export const loginData = (state: any) => state.login;
+export const estaLogueado = (state: any) => state.login.isLogged;
 
 export default loginSlice.reducer;

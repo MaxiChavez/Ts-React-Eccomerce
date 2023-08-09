@@ -12,8 +12,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../../redux/categorySlice";
 import { addSearch } from "../../redux/searchSlice";
-import { cartData, removeToCart } from "../../redux/cartSlice";
-import { updateUser } from "../../redux/loginSlice";
+import { removeToCart } from "../../redux/cartSlice";
+import { cleanCart } from "../../redux/cartSlice";
+import { estaLogueado, updateUser } from "../../redux/loginSlice";
 import { loginData } from "../../redux/loginSlice";
 import { IUserData } from "../Services/IUserInterface";
 import { cartTotalQuantity } from "../../redux/cartSlice";
@@ -24,13 +25,13 @@ interface Category {
 
 export const Header = () => {
   const cantidadTotalCarrito = useSelector(cartTotalQuantity);
-  const cartState = useSelector(cartData);
+  console.log("Cantidad total", cantidadTotalCarrito)
   const location = useLocation();
   const navigate = useNavigate();
   const [categorias, setCategorias] = useState<string[]>([]);
   const [search, setSearch] = useState<string>("");
   const [debouncedSearch] = useDebounce(search, 1000);
-  const isLogged = useSelector((state: any) => state.login.isLogged);
+  const isLogged: boolean = useSelector(estaLogueado);
 
   const dispatch = useDispatch();
 
@@ -133,8 +134,10 @@ export const Header = () => {
                         className="mx-2 mt-2"
                         variant="outline-dark"
                         onClick={() => {
-                          dispatch(updateUser({ isLogged: false, user: {} }));
-                          dispatch(removeToCart([]));
+                          dispatch(updateUser({ isLogged: false }));
+                          dispatch(updateUser({ user: {} }));
+                          dispatch(cleanCart());
+                          navigate("/")
                         }}
                       >
                         Logout
@@ -159,7 +162,7 @@ export const Header = () => {
                               d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zm5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
                             />
                           </svg>
-                          ( {cartState.cantidadTotal} )
+                          ( {cantidadTotalCarrito} )
                         </Button>
                       )}
                     </>

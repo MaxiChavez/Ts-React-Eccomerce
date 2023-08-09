@@ -1,19 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { CartState, ProductoCarrito } from "../Common/Interfaces/Productos";
 
-interface ProductoCarrito {
-  id: string;
-  title: string;
-  price: string;
-  description: string;
-  image: string;
-  category: string;
-  amount: number;
-}
-
-interface CartState {
-  items: ProductoCarrito[];
-  cantidadTotal: number;
-}
 const initialState: CartState = {
   items: [],
   cantidadTotal: 0,
@@ -49,14 +36,18 @@ const cartSlice = createSlice({
         0
       );
     },
+    cleanCart: (state) => {
+      state.cantidadTotal = 0;
+      state.items = []
+    },
   },
 });
 
 //exporto las ACCIONES.....
-export const { addToCart, removeToCart } = cartSlice.actions;
+export const { addToCart, removeToCart, cleanCart } = cartSlice.actions;
 
-export const cartData = (state: any) => state.cart;
+export const cartData = (state: any) => state.cart.items;
 
-export const cartTotalQuantity = (state: any) => state.cantidadTotal;
+export const cartTotalQuantity = (state: any) => state.cart.cantidadTotal;
 
 export default cartSlice.reducer;

@@ -4,7 +4,7 @@ const baseUrl = "http://localhost:3000/";
 
 export const loginUser = async (loginData: ILoginData): Promise<any> => {
   console.log(loginData);
-  const url = `${baseUrl}user?email=${loginData.username}&pass=${loginData.password}`;
+  const url = `${baseUrl}user?email=${loginData.username}&password=${loginData.password}`;
   try {
     const response = await axios.get(url);
     return response.data;
