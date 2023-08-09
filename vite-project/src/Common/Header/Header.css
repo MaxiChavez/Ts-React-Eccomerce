@@ -20,11 +20,17 @@ basic-nav-dropdown {
 
 #btn-cart {
   width: 6em;
-  height: 2.5em !important;
+  height: 2.4em !important;
   margin-bottom: 0;
-  padding-bottom: 0;
-  align-items: baseline !important;
+  padding-bottom: 1px !important;
+  align-items: center;
   margin-left: 1px !important;
+  display: flex;
+  justify-content: center;
+}
+
+#btn-cart svg {
+  margin-top: -2px;
 }
 
 .mx-4 {
@@ -33,7 +39,8 @@ basic-nav-dropdown {
   margin: 0;
 }
 .mt-2 {
-  margin-top: 0.3rem !important;
+  padding-bottom: 1px !important;
+  height: 2.4em !important;
 }
 
 .form-select {
@@ -43,6 +50,7 @@ basic-nav-dropdown {
 #logincart {
   display: flex;
   align-items: center;
+  vertical-align: baseline !important;
 }
 .buttons-container {
   display: flex;

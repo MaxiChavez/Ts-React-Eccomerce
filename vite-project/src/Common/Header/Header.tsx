@@ -146,7 +146,6 @@ export const Header = () => {
                       {isLogged && (
                         <Button
                           id="btn-cart"
-                          className="mx-4"
                           variant="outline-dark"
                           onClick={() => navigate("/cart")}
                         >
@@ -156,7 +155,7 @@ export const Header = () => {
                             height="16"
                             fill="currentColor"
                             className="bi bi-cart-fill ms-1"
-                            viewBox="0 0 16 16"
+                            viewBox="0 0 18 18"
                           >
                             <path
                               fillRule="evenodd"

@@ -138,8 +138,11 @@ export const Cart = () => {
           </MDBCol>
         </MDBRow>
         {/* Tarjeta */}
-        <MDBRow className="justify-content-center align-items-center h-100">
-          <MDBCol lg="4" xl="6">
+        <MDBRow
+          id="divTarjeta"
+          className="shadow-2-strong mb-5 mb-lg-4 text-center"
+        >
+          <MDBCol xxl="6" xl="6">
             <MDBCard
               id="tarjeta"
               className="shadow-2-strong mb-5 mb-lg-4"
@@ -249,10 +252,10 @@ export const Cart = () => {
                   </MDBCol>
                   <MDBCol lg="4" xl="3">
                     <div
-                      className="d-flex justify-content-between"
+                      className="d-flex justify-content-center"
                       style={{ fontWeight: "500" }}
                     >
-                      <p className="mb-2">Subtotal</p>
+                      <p className="mb-2">Subtotal: </p>
                       <p className="mb-2">{calculateCartTotal()}</p>
                     </div>
 
