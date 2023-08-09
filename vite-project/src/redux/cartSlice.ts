@@ -9,9 +9,10 @@ const initialState: CartState = {
 interface IUpdateCart {
   id: string;
   newAmount: number;
+  price: number;
 }
 
-const calcularCantidadTotal = (productos: ProductoCarrito[]): number => {
+export const calcularCantidadTotal = (productos: ProductoCarrito[]): number => {
   let total = 0;
   productos.forEach((producto) => {
     total += Number(producto.amount);
@@ -54,6 +55,7 @@ const cartSlice = createSlice({
       );
       state.cantidadTotal = calcularCantidadTotal(state.items);
     },
+
     cleanCart: (state) => {
       state.cantidadTotal = 0;
       state.items = [];

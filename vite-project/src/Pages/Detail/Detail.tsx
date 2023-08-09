@@ -80,7 +80,7 @@ const Detail = () => {
             <List mt={30} spacing="sm" size="sm">
               <List.Item>{detailRdx.description}</List.Item>
               <List.Item>Category: {detailRdx.category}</List.Item>
-              <List.Item>Price: {detailRdx.price}</List.Item>
+              <List.Item> {detailRdx.price}</List.Item>
             </List>
 
             <Group mt={30}>

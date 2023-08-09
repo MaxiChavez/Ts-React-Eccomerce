@@ -1,7 +1,6 @@
 import "./Cart.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ProductoCarrito } from "../../Common/Interfaces/Productos";
 
 import {
   MDBBtn,
@@ -17,19 +16,39 @@ import {
   MDBTableBody,
   MDBTableHead,
 } from "mdb-react-ui-kit";
-import { cartData, updateProductAmount, removeProduct } from "../../redux/cartSlice";
+import {
+  cartData,
+  updateProductAmount,
+  removeProduct,
+} from "../../redux/cartSlice";
 
 export const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cartArticlesRdx: ProductoCarrito[] = useSelector(cartData);
+
+  const cartArticlesRdx = useSelector(cartData);
+
+  const calculateCartTotal = () => {
+    return cartArticlesRdx
+      .reduce((total: number, product: any) => {
+        const priceString = product.price;
+        const priceValue = parseFloat(priceString.split("$")[1]);
+
+        const productTotal = product.amount * priceValue;
+        return total + productTotal;
+      }, 0)
+      .toFixed(2);
+  };
+
+  const precioTotalSi = calculateCartTotal();
+  console.log("soy el precio total sii:", precioTotalSi);
 
   const handleInputChange = (idProduct: string, value: number) => {
     dispatch(updateProductAmount({ id: idProduct, newAmount: value }));
   };
   const removeElement = (idProduct: string) => {
-    console.log(idProduct)
-    dispatch(removeProduct(idProduct))
+    console.log(idProduct);
+    dispatch(removeProduct(idProduct));
   };
 
   return (
@@ -63,7 +82,18 @@ export const Cart = () => {
                           />
                           <div className="flex-column ms-4">
                             <p className="mb-2">{item.title}</p>
-                            <button onClick={() => removeElement(item.id)}>Eliminar</button>
+                            <button
+                              className="eliminarYseguir"
+                              onClick={() => removeElement(item.id)}
+                            >
+                              Delete
+                            </button>
+                            <button
+                              className="eliminarYseguir"
+                              onClick={() => navigate("/")}
+                            >
+                              Continue Shopping
+                            </button>
                           </div>
                         </div>
                       </th>
@@ -74,7 +104,7 @@ export const Cart = () => {
                       </td>
                       <td className="align-middle">
                         <div className="d-flex flex-row align-items-center">
-                          <MDBBtn className="px-2" color="link" >
+                          <MDBBtn className="px-2" color="link">
                             <MDBIcon fas icon="minus" />
                           </MDBBtn>
 
@@ -84,7 +114,9 @@ export const Cart = () => {
                             size="sm"
                             style={{ width: "50px" }}
                             defaultValue={item.amount}
-                            onChange={(e) => handleInputChange(item.id, e.target.value)}
+                            onChange={(e) =>
+                              handleInputChange(item.id, e.target.value)
+                            }
                           />
 
                           <MDBBtn className="px-2" color="link">
@@ -98,17 +130,9 @@ export const Cart = () => {
                         </p>
                       </td>
                     </tr>
-                    <tr>
-
-
-
-
-                    </tr>
+                    <tr></tr>
                   </>
-
-
                 ))}
-
               </MDBTableBody>
             </MDBTable>
           </MDBCol>
@@ -229,26 +253,26 @@ export const Cart = () => {
                       style={{ fontWeight: "500" }}
                     >
                       <p className="mb-2">Subtotal</p>
-                      <p className="mb-2">$23.49</p>
+                      <p className="mb-2">{calculateCartTotal()}</p>
                     </div>
 
                     <div>
                       <MDBInput
-                        label="Dirección de envío"
-                        placeholder="Ingresa tu dirección"
+                        label="Shipping Address"
+                        placeholder="Enter your shipping address:"
                       />
                       <MDBInput
-                        label="Código postal"
-                        placeholder="Ingresa tu código postal"
+                        label="ZIP Code"
+                        placeholder="Enter your ZIP code:"
                       />
 
-                      <MDBBtn color="outline-dark">Finalizar Compra</MDBBtn>
+                      <MDBBtn color="outline-dark">Buy</MDBBtn>
 
                       <MDBBtn
                         color="outline-dark"
                         onClick={() => navigate("/")}
                       >
-                        Volver
+                        Continue Shopping
                       </MDBBtn>
                     </div>
                   </MDBCol>
