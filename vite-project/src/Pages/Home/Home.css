@@ -11,10 +11,13 @@ body {
 
 .card-section {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 1em;
   align-items: center !important;
-  margin: 3em;
+
+  margin-right: 10%;
+  margin-left: 10%;
+
   align-items: center;
   justify-content: center;
 }

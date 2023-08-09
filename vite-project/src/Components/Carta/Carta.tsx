@@ -24,7 +24,7 @@ function CartaProducto(producto: CardProps) {
   };
   return (
     <Card
-      className="shadow border rounded-5 text-center hover"
+      className="shadow border rounded-5 text-center hover justify-content-center"
       style={{ width: "15rem" }}
     >
       <Card.Img variant="top" src={producto.image} />

@@ -5,19 +5,24 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
 .card {
   height: 35em !important;
-  width: 20em !important;
+  width: 18em !important;
   padding: 1em;
   align-items: center;
   justify-content: center;
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  transition: transform 0.3s ease;
 }
+
 .card:hover {
-  transform: scale(1.05); /* Aumenta la escala al 105% en el hover */
-  transition: transform 0.3s ease; /* Agrega una transición suave de 0.3 segundos */
+  transform: scale(1.05);
+  /* Aumenta la escala al 105% en el hover */
+  transition: transform 0.3s ease;
+  /* Agrega una transición suave de 0.3 segundos */
 }
 
 .card-section {
@@ -30,13 +35,12 @@ body {
   width: 95% !important;
   height: 55% !important;
 }
+
 .card-body {
   padding: 1em !important;
   margin: 0 !important;
   align-items: center;
   justify-content: center;
-  height: 3em !important;
 }
 
-@media screen {
-}
+@media screen {}

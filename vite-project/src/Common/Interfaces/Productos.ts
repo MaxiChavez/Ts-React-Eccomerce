@@ -1,4 +1,4 @@
-export interface ProductoCarrito {
+export interface IProductoCarrito {
   id: string;
   title: string;
   price: string;
@@ -8,7 +8,8 @@ export interface ProductoCarrito {
   amount: number;
 }
 
-export interface CartState {
-  items: ProductoCarrito[];
-  cantidadTotal: number;
+export interface ICartState {
+  items: IProductoCarrito[];
+  cantidadTotal: number,
+  montoTotal : number
 }

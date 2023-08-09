@@ -128,9 +128,7 @@ export const Header = () => {
                 >
                   {isLogged ? (
                     <>
-                      <span className="mx-2 mt-2">
-                        Hi: {userLogRd.user.name}
-                      </span>
+                      <Button>Profile</Button>
                       <Button
                         className="mx-2 mt-2"
                         variant="outline-dark"

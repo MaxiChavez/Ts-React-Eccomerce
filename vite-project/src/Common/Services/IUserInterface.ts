@@ -7,11 +7,17 @@ export interface IuserDataAdress {
 
 export interface IUserData {
   name: string;
-
   email: string;
   password: string;
   phone: string;
   rol: string;
+  adress: IuserDataAdress;
+}
+
+export interface IUserOrder {
+  name: string;
+  email: string;
+  phone: string;
   adress: IuserDataAdress;
 }
 
