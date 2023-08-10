@@ -128,7 +128,11 @@ export const Header = () => {
                 >
                   {isLogged ? (
                     <>
-                      <Button className="mx-2 mt-2" variant="outline-dark">
+                      <Button
+                        className="mx-2 mt-2"
+                        variant="outline-dark"
+                        onClick={() => navigate("/user")}
+                      >
                         Profile
                       </Button>
                       <Button
@@ -148,6 +152,7 @@ export const Header = () => {
                           id="btn-cart"
                           variant="outline-dark"
                           onClick={() => navigate("/cart")}
+                          disabled={cantidadTotalCarrito === 0}
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

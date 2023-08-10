@@ -72,7 +72,7 @@ export const Cart = () => {
               <MDBTableBody>
                 {cartArticlesRdx.map((item) => (
                   <>
-                    <tr>
+                    <tr key={item.id}>
                       <th scope="row">
                         <div className="d-flex align-items-center">
                           <img

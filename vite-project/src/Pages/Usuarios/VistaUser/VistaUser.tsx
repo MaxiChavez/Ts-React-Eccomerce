@@ -207,8 +207,18 @@
 
 import "./VistaUser.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useSelector } from "react-redux";
+import { IUserData } from "../../../Common/Services/IUserInterface";
+import { userData } from "../../../redux/loginSlice";
+import { useNavigate } from "react-router-dom";
+
+//rdx
 
 export const VistaUser = () => {
+  const navigate = useNavigate();
+  const userRdx = useSelector(userData);
+  console.log("userdata de vistaUSer:", userRdx);
+
   return (
     <div id="userDiv" className="col-md-5 border-right ">
       <div className="p-3 py-5 userDiv">
@@ -218,35 +228,35 @@ export const VistaUser = () => {
         <div className="user-info">
           <div className="user-info-item">
             <label className="labels white-text">Name:</label>
-            <div className="white-bg">pepe</div>
+            <div className="white-bg">{userRdx.name}</div>
           </div>
           <div className="user-info-item">
             <label className="labels white-text">Email:</label>
-            <div className="white-bg">1@gmail.com</div>
+            <div className="white-bg">{userRdx.email}</div>
           </div>
           <div className="user-info-item">
             <label className="labels white-text">Mobile Number:</label>
-            <div className="white-bg">1234567890</div>
+            <div className="white-bg">{userRdx.phone}</div>
           </div>
           <div className="user-info-item">
             <label className="labels white-text">Address city:</label>
-            <div className="white-bg">Malaga</div>
+            <div className="white-bg">{userRdx.address.city}</div>
           </div>
           <div className="user-info-item">
             <label className="labels white-text">Address street:</label>
-            <div className="white-bg">Aptdsdsd</div>
+            <div className="white-bg">{userRdx.address.street}</div>
           </div>
           <div className="user-info-item">
             <label className="labels white-text">Address number:</label>
-            <div className="white-bg">456</div>
+            <div className="white-bg">{userRdx.address.number}</div>
           </div>
           <div className="user-info-item">
             <label className="labels white-text">Postcode:</label>
-            <div className="white-bg">12345</div>
+            <div className="white-bg">{userRdx.address.zipcode}</div>
           </div>
           <div className="user-info-item">
             <label className="labels white-text">id:</label>
-            <div className="white-bg">1</div>
+            <div className="white-bg">{userRdx.id}</div>
           </div>
         </div>
         <div className="mt-5 text-center m-1 ">
@@ -260,6 +270,7 @@ export const VistaUser = () => {
           <button
             className="btn btn-outline-dark profile-button "
             type="button"
+            onClick={() => navigate("/")}
           >
             Home
           </button>
