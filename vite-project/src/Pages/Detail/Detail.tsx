@@ -85,12 +85,13 @@ const Detail = () => {
 
             <Group mt={30}>
               <Button
+                color="dark"
                 radius="xl"
                 size="md"
                 className={classes.control}
                 onClick={() => navigate("/")}
               >
-                Volver
+                Home
               </Button>
               <Button
                 variant="default"

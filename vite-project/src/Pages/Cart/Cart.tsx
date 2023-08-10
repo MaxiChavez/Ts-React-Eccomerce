@@ -1,7 +1,12 @@
 import "./Cart.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { cartTotalQuantity, cartTotalPrice, cart, cleanCart } from "../../redux/cartSlice";
+import {
+  cartTotalQuantity,
+  cartTotalPrice,
+  cart,
+  cleanCart,
+} from "../../redux/cartSlice";
 import {
   MDBBtn,
   MDBCol,
@@ -21,6 +26,7 @@ import {
 import { Button } from "@mantine/core";
 import { registerOrder } from "../../Common/Services/OrderService";
 import { userData } from "../../redux/loginSlice";
+import { ModalBoton } from "../../Components/Modal/Modal";
 
 export const Cart = () => {
   const cantidadTotalCarrito = useSelector(cartTotalQuantity);
@@ -28,7 +34,6 @@ export const Cart = () => {
   const cartArticlesRdx = useSelector(cartData);
   const cartRdx = useSelector(cart);
   const userRdx = useSelector(userData);
-
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -43,10 +48,9 @@ export const Cart = () => {
   };
 
   const generateOrder = () => {
-    registerOrder(cartRdx, userRdx)
-    dispatch(cleanCart())
-    navigate("/")
-  }
+    registerOrder(cartRdx, userRdx);
+    dispatch(cleanCart());
+  };
 
   return (
     <section className="h-100 h-custom">
@@ -133,8 +137,7 @@ export const Cart = () => {
             <MDBTable responsive>
               <MDBTableHead>
                 <tr>
-                  <th scope="col" className="h5">
-                  </th>
+                  <th scope="col" className="h5"></th>
                   <th scope="col">PRECIO TOTAL</th>
                   <th scope="col">CANTIDAD DE ARTICULOS</th>
                   <th scope="col" />
@@ -144,8 +147,7 @@ export const Cart = () => {
                 <tr>
                   <th scope="row">
                     <div className="d-flex align-items-center">
-                      <div className="flex-column ms-4">
-                      </div>
+                      <div className="flex-column ms-4"></div>
                     </div>
                   </th>
                   <td className="align-middle">
@@ -161,7 +163,19 @@ export const Cart = () => {
                     </div>
                   </td>
                   <td className="align-middle">
-                    <Button onClick={() => generateOrder()}>Finalizar Compra</Button>
+                    <ModalBoton
+                      buttonText="Finish buy"
+                      deleteButtonText="Remove"
+                      modalText="Thanks you for your purchase!"
+                      buttonVariant="secondary"
+                      showDeleteButton={false}
+                      onCloseClick={() => {
+                        generateOrder();
+                        navigate("/");
+
+                        console.log("boton cerrar modal");
+                      }}
+                    />
                   </td>
                 </tr>
               </MDBTableBody>

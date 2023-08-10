@@ -128,7 +128,9 @@ export const Header = () => {
                 >
                   {isLogged ? (
                     <>
-                      <Button>Profile</Button>
+                      <Button className="mx-2 mt-2" variant="outline-dark">
+                        Profile
+                      </Button>
                       <Button
                         className="mx-2 mt-2"
                         variant="outline-dark"

@@ -1,6 +1,5 @@
 import Table from "react-bootstrap/Table";
-import { ModalBoton } from "./modal";
-
+import { ModalBoton } from "../../../Components/Modal/Modal";
 export const VistaAdmin = () => {
   return (
     <div>
@@ -19,7 +18,12 @@ export const VistaAdmin = () => {
             <td>Mark</td>
             <td>Otto</td>
             <td>
-              <ModalBoton />
+              <ModalBoton
+                buttonText="View order (Admin)"
+                deleteButtonText="Delete Order"
+                modalText="27 remeras 3 reljos (Admin)"
+                buttonVariant="primary"
+              />
             </td>
           </tr>
         </tbody>
