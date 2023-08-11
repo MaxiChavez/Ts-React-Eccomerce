@@ -12,6 +12,7 @@ export interface IUserData {
   phone: string;
   rol: string;
   adress: IuserDataAdress;
+  id: number;
 }
 
 export interface IUserOrder {
