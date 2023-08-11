@@ -10,6 +10,7 @@ export interface IProductoCarrito {
 
 export interface ICartState {
   items: IProductoCarrito[];
-  cantidadTotal: number,
-  montoTotal : number
+  cantidadTotal: number;
+  montoTotal: number;
+  amount: number;
 }
