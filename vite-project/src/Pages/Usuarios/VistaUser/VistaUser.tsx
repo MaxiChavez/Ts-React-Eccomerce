@@ -211,13 +211,31 @@ import { useSelector } from "react-redux";
 import { IUserData } from "../../../Common/Services/IUserInterface";
 import { userData } from "../../../redux/loginSlice";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+import { cart } from "../../../redux/cartSlice";
+import {
+  ICartState,
+  IProductoCarrito,
+} from "../../../Common/Interfaces/Productos";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 //rdx
 
 export const VistaUser = () => {
   const navigate = useNavigate();
   const userRdx = useSelector(userData);
+  const cartRdx = useSelector(cart);
+  console.log("soy cartRDX de vista user ", cartRdx);
+
   console.log("userdata de vistaUSer:", userRdx);
+
+  //modal
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div id="userDiv" className="col-md-5 border-right ">
@@ -260,13 +278,40 @@ export const VistaUser = () => {
           </div>
         </div>
         <div className="mt-5 text-center m-1 ">
-          <button
+          {/* <button
             className="btn btn-outline-dark profile-button mr-4"
             type="button"
           >
             Edit Profile
-          </button>
+          </button> */}
+          {/* <ModalBoton
+            buttonText="View order (Admin)"
+            modalText={`Articles: ${cartRdx.items
+              .map((item) => item.title)
+              .join(", ")} |||||   Price: ${cartRdx.montoTotal}`}
+            buttonVariant="dark"
+          /> */}
+          <Button variant="outline-dark" onClick={handleShow}>
+            Purchase
+          </Button>
 
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Thanks you, for your purchase</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div>
+                Articles: {cartRdx.items.map((item) => item.title).join(", ")}
+                <br />
+                Total: {cartRdx.montoTotal}
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
           <button
             className="btn btn-outline-dark profile-button "
             type="button"
