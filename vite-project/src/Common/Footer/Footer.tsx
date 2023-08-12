@@ -4,9 +4,10 @@ import { useLocation } from "react-router-dom";
 const Footer = () => {
   const location = useLocation();
 
-  const isCartView = location.pathname === "/cart";
+  const cartView = location.pathname === "/cart";
+  const adminView = location.pathname === "/admin";
 
-  if (isCartView) {
+  if (cartView || adminView) {
     return null;
   } else
     return (

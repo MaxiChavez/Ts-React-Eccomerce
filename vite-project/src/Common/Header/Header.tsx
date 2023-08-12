@@ -81,7 +81,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className=" mb-2 mb-lg-0" navbarScroll>
-              {userLogRd.user.rol !== 'a' && location.pathname === "/" && (
+              {userLogRd.user.rol !== "a" && location.pathname === "/" && (
                 <Form className="d-flex">
                   <Form.Control
                     type="search"
@@ -94,7 +94,7 @@ const Header = () => {
                 </Form>
               )}
 
-              {userLogRd.user.rol !== 'a' && location.pathname === "/" && (
+              {userLogRd.user.rol !== "a" && location.pathname === "/" && (
                 <div className="d-flex align-items-center">
                   <NavDropdown title="Categories" id="Categories" align="start">
                     <NavDropdown.Item
@@ -141,7 +141,7 @@ const Header = () => {
               >
                 {isLogged ? (
                   <>
-                    {userLogRd.user.rol === 'u' ? (
+                    {userLogRd.user.rol === "u" ? (
                       <Link to="/user" className="dropdown-item">
                         Profile
                       </Link>
@@ -158,11 +158,12 @@ const Header = () => {
                     >
                       Logout
                     </Link>
-                    {isLogged && userLogRd.user.rol === 'u' && (
+                    {isLogged && userLogRd.user.rol === "u" && (
                       <Link
                         to="/cart"
-                        className={`dropdown-item ${cantidadTotalCarrito === 0 ? "disabled" : ""
-                          }`}
+                        className={`dropdown-item ${
+                          cantidadTotalCarrito === 0 ? "disabled" : ""
+                        }`}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

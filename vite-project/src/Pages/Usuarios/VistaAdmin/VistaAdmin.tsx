@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import { IUserData } from "../../../Common/Services/IUserInterface";
 
 export const VistaAdmin = () => {
-
   const userLogRd: { user: IUserData } = useSelector(loginData);
   const [orders, setOrders] = useState([]);
 
@@ -27,7 +26,7 @@ export const VistaAdmin = () => {
   }, []);
 
   return (
-    <div>
+    <div id="containerAdmin">
       <Table id="tablaAdmin" striped bordered hover>
         <thead>
           <tr>
@@ -44,7 +43,6 @@ export const VistaAdmin = () => {
               <td>{order.user.name}</td>
               <td>{order.id}</td>
 
-
               <td>
                 <ModalBoton
                   buttonText="View order"
@@ -54,32 +52,41 @@ export const VistaAdmin = () => {
                     <div>
                       {order.cart.items.length > 0 && (
                         <div>
-                          Items:<br />
+                          Items:
+                          <br />
                           {order.cart.items.map((item, index) => (
                             <span key={index}>
-                              ({item.amount}) {item.title}<br />
+                              ({item.amount}) {item.title}
+                              <br />
                             </span>
                           ))}
                         </div>
-                      )}<br />
+                      )}
+                      <br />
                       {order.user && (
-                        <div>Address: <br />
-                          City:{order.user.address.city}<br />
-                          Street:{order.user.address.street}<br />
-                          number:{order.user.address.number}<br />
-                          Zipcode: {order.user.address.zipcode}<br />
-
+                        <div>
+                          Address: <br />
+                          City:{order.user.address.city}
+                          <br />
+                          Street:{order.user.address.street}
+                          <br />
+                          number:{order.user.address.number}
+                          <br />
+                          Zipcode: {order.user.address.zipcode}
+                          <br />
                         </div>
                       )}
                       {order.cart.montoTotal && (
-
-                        <div><br />Total: {order.cart.montoTotal}</div>
+                        <div>
+                          <br />
+                          Total: {order.cart.montoTotal}
+                        </div>
                       )}
                     </div>
                   }
                   buttonVariant={order.isProcessed ? "success" : "primary"}
                   isProcessed={order.isProcessed}
-                  onCloseClick={() => { }}
+                  onCloseClick={() => {}}
                 />
               </td>
             </tr>
