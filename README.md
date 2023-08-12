@@ -81,7 +81,7 @@ Admin responsive
 Carrito de compras
 <img src="./vite-project/src/assets/Compra%20Cart.png">
 Ordenes Admin
-<img src="./vite-project/src/assets/Admin.png>
+<img src="./vite-project/src/assets/Admin-vista.png">
 
 Detail
 <img src="./vite-project/src/assets/Detail.png">
