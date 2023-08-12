@@ -46,3 +46,14 @@ export const getOrders = async (): Promise<any> => {
     }
 };
 
+export const updateOrderProcessedStatus = async (orderId:number) => {
+    try {
+      const response = await axios.patch(`${baseUrl}orders/${orderId}`, {
+        isProcessed: true
+      });
+      return response.data;
+    } catch (error) {
+        console.error("Error al procesar la orden", error);
+    }
+};
+

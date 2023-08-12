@@ -7,6 +7,7 @@
   margin-right: 10%;
   margin-left: 10%;
 
+  min-height: 100vh;
   align-items: center;
   justify-content: center;
   max-width: 100vw;
@@ -21,7 +22,7 @@
   vertical-align: middle !important;
 }
 
- /* Media querys  */
+/* Media querys */
 @media (max-width: 1200px) {
   .card-section {
     grid-template-columns: 1fr 1fr 1fr;

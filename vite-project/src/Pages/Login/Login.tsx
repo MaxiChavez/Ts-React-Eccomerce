@@ -27,6 +27,7 @@ import {
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../redux/loginSlice";
 import { useNavigate } from "react-router-dom";
+import { cleanCart } from "../../redux/cartSlice";
 
 export const Login = (props: PaperProps) => {
   const [type, toggle] = useToggle(["login", "register"]);
@@ -44,7 +45,7 @@ export const Login = (props: PaperProps) => {
         };
         try {
           const usuarioLogueado: IUserData[] = await loginUser(userLogin);
-          console.log(userLogin)
+          console.log(userLogin);
           if (usuarioLogueado.length > 0) {
             console.log(usuarioLogueado[0]);
             //PRIMERO GUARDO EL usuarioLogueado[1] EN REDUX:
@@ -52,7 +53,7 @@ export const Login = (props: PaperProps) => {
             console.log(logedUser);
             dispatch(updateUser({ user: logedUser }));
             dispatch(updateUser({ isLogged: true }));
-
+            dispatch(cleanCart());
             //ACA REDIRECCIONO AL HOME:
             navigate("/");
 
@@ -121,150 +122,159 @@ export const Login = (props: PaperProps) => {
   });
 
   return (
-    <Paper radius="md" p="xl" withBorder {...props}>
-      <Group grow mb="md" mt="md">
-        <GoogleButton radius="xl">Google</GoogleButton>
-        <TwitterButton radius="xl">Twitter</TwitterButton>
-      </Group>
-
-      <Divider label="Or continue with email" labelPosition="center" my="lg" />
-
-      <form onSubmit={form.onSubmit(() => executeForm())}>
-        <Stack>
-          {type === "register" && (
-            <>
-              <TextInput
-                label="Name"
-                placeholder="Your name"
-                value={form.values.name}
-                onChange={(event) =>
-                  form.setFieldValue("name", event.currentTarget.value)
-                }
-                radius="md"
-              />
-              <TextInput
-                required
-                label="City"
-                placeholder="Málaga"
-                value={form.values.address.city}
-                onChange={(event) =>
-                  form.setFieldValue("address.city", event.currentTarget.value)
-                }
-                error={form.errors.address && "Invalid address"}
-                radius="md"
-              />
-              <TextInput
-                required
-                label="Calle"
-                placeholder="Calle 123"
-                value={form.values.address.street}
-                onChange={(event) =>
-                  form.setFieldValue(
-                    "address.street",
-                    event.currentTarget.value
-                  )
-                }
-                error={form.errors.address && "Invalid address"}
-                radius="md"
-              />
-              <TextInput
-                required
-                label="Numero"
-                placeholder="1234"
-                value={form.values.address.number}
-                onChange={(event) =>
-                  form.setFieldValue(
-                    "address.number",
-                    event.currentTarget.value
-                  )
-                }
-                error={form.errors.address && "Invalid address"}
-                radius="md"
-              />
-              <TextInput
-                required
-                label="Zipcode"
-                placeholder="A1234B"
-                value={form.values.address.zipcode}
-                onChange={(event) =>
-                  form.setFieldValue(
-                    "address.zipcode",
-                    event.currentTarget.value
-                  )
-                }
-                error={form.errors.address && "Invalid address"}
-                radius="md"
-              />
-
-              <TextInput
-                required
-                label="Phone"
-                placeholder="1355433462"
-                value={form.values.phone}
-                onChange={(event) =>
-                  form.setFieldValue("phone", event.currentTarget.value)
-                }
-                error={form.errors.phone && "Invalid phone"}
-                radius="md"
-              />
-            </>
-          )}
-
-          <TextInput
-            required
-            label="Email"
-            placeholder="hello@mantine.dev"
-            value={form.values.email}
-            onChange={(event) =>
-              form.setFieldValue("email", event.currentTarget.value)
-            }
-            error={form.errors.email && "Invalid email"}
-            radius="md"
-          />
-
-          <PasswordInput
-            required
-            label="Password"
-            placeholder="Your password"
-            value={form.values.password}
-            onChange={(event) =>
-              form.setFieldValue("password", event.currentTarget.value)
-            }
-            error={
-              form.errors.password &&
-              "Password should include at least 6 characters"
-            }
-            radius="md"
-          />
-
-          {type === "register" && (
-            <Checkbox
-              label="I accept terms and conditions"
-              checked={form.values.terms}
-              onChange={(event) =>
-                form.setFieldValue("terms", event.currentTarget.checked)
-              }
-            />
-          )}
-        </Stack>
-
-        <Group position="apart" mt="xl">
-          <Anchor
-            component="button"
-            type="button"
-            color="dimmed"
-            onClick={() => toggle()}
-            size="xs"
-          >
-            {type === "register"
-              ? "Already have an account? Login"
-              : "Don't have an account? Register"}
-          </Anchor>
-          <Button type="submit" radius="xl">
-            {upperFirst(type)}
-          </Button>
+    <div id="login">
+      <Paper radius="md" p="xl" withBorder {...props}>
+        <Group grow mb="md" mt="md">
+          <GoogleButton radius="xl">Google</GoogleButton>
+          <TwitterButton radius="xl">Twitter</TwitterButton>
         </Group>
-      </form>
-    </Paper>
+
+        <Divider
+          label="Or continue with email"
+          labelPosition="center"
+          my="lg"
+        />
+
+        <form onSubmit={form.onSubmit(() => executeForm())}>
+          <Stack>
+            {type === "register" && (
+              <>
+                <TextInput
+                  label="Name"
+                  placeholder="Your name"
+                  value={form.values.name}
+                  onChange={(event) =>
+                    form.setFieldValue("name", event.currentTarget.value)
+                  }
+                  radius="md"
+                />
+                <TextInput
+                  required
+                  label="City"
+                  placeholder="Málaga"
+                  value={form.values.address.city}
+                  onChange={(event) =>
+                    form.setFieldValue(
+                      "address.city",
+                      event.currentTarget.value
+                    )
+                  }
+                  error={form.errors.address && "Invalid address"}
+                  radius="md"
+                />
+                <TextInput
+                  required
+                  label="Calle"
+                  placeholder="Calle 123"
+                  value={form.values.address.street}
+                  onChange={(event) =>
+                    form.setFieldValue(
+                      "address.street",
+                      event.currentTarget.value
+                    )
+                  }
+                  error={form.errors.address && "Invalid address"}
+                  radius="md"
+                />
+                <TextInput
+                  required
+                  label="Numero"
+                  placeholder="1234"
+                  value={form.values.address.number}
+                  onChange={(event) =>
+                    form.setFieldValue(
+                      "address.number",
+                      event.currentTarget.value
+                    )
+                  }
+                  error={form.errors.address && "Invalid address"}
+                  radius="md"
+                />
+                <TextInput
+                  required
+                  label="Zipcode"
+                  placeholder="A1234B"
+                  value={form.values.address.zipcode}
+                  onChange={(event) =>
+                    form.setFieldValue(
+                      "address.zipcode",
+                      event.currentTarget.value
+                    )
+                  }
+                  error={form.errors.address && "Invalid address"}
+                  radius="md"
+                />
+
+                <TextInput
+                  required
+                  label="Phone"
+                  placeholder="1355433462"
+                  value={form.values.phone}
+                  onChange={(event) =>
+                    form.setFieldValue("phone", event.currentTarget.value)
+                  }
+                  error={form.errors.phone && "Invalid phone"}
+                  radius="md"
+                />
+              </>
+            )}
+
+            <TextInput
+              required
+              label="Email"
+              placeholder="hello@mantine.dev"
+              value={form.values.email}
+              onChange={(event) =>
+                form.setFieldValue("email", event.currentTarget.value)
+              }
+              error={form.errors.email && "Invalid email"}
+              radius="md"
+            />
+
+            <PasswordInput
+              required
+              label="Password"
+              placeholder="Your password"
+              value={form.values.password}
+              onChange={(event) =>
+                form.setFieldValue("password", event.currentTarget.value)
+              }
+              error={
+                form.errors.password &&
+                "Password should include at least 6 characters"
+              }
+              radius="md"
+            />
+
+            {type === "register" && (
+              <Checkbox
+                label="I accept terms and conditions"
+                checked={form.values.terms}
+                onChange={(event) =>
+                  form.setFieldValue("terms", event.currentTarget.checked)
+                }
+              />
+            )}
+          </Stack>
+
+          <Group position="apart" mt="xl">
+            <Anchor
+              component="button"
+              type="button"
+              color="dimmed"
+              onClick={() => toggle()}
+              size="xs"
+            >
+              {type === "register"
+                ? "Already have an account? Login"
+                : "Don't have an account? Register"}
+            </Anchor>
+            <Button type="submit" radius="xl">
+              {upperFirst(type)}
+            </Button>
+          </Group>
+        </form>
+      </Paper>
+    </div>
   );
 };

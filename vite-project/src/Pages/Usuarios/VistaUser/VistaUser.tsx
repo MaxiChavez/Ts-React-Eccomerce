@@ -1,16 +1,14 @@
 import "./VistaUser.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useSelector } from "react-redux";
-
 import { userData } from "../../../redux/loginSlice";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-
-import { cart } from "../../../redux/cartSlice";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { getOrders } from "../../../Common/Services/OrderService";
+import { IOrder } from "../../../Common/Interfaces/Ordenes";
 
 //rdx
 
@@ -18,13 +16,6 @@ export const VistaUser = () => {
   const navigate = useNavigate();
   const userRdx = useSelector(userData);
   const loggedUserId = userRdx.id;
-
-  console.log("idddd", loggedUserId);
-
-  const cartRdx = useSelector(cart);
-  console.log("soy cartRDX de vista user ", cartRdx);
-
-  console.log("userdata de vistaUSer:", userRdx);
 
   //modal
   const [show, setShow] = useState(false);
@@ -38,7 +29,6 @@ export const VistaUser = () => {
     try {
       const ordersData = await getOrders();
       setOrders(ordersData);
-      console.log("son las ordenes de user???:", ordersData);
     } catch (error) {
       console.log("erorr:", error);
     }
@@ -47,12 +37,12 @@ export const VistaUser = () => {
   useEffect(() => {
     fetchOrders();
   }, []);
-
+  console.log(orders)
   return (
     <div id="userDiv" className="mx-auto border-right ">
       <div className="p-3 py-5 userDiv">
         <div className="d-flex justify-content-between align-items-center mb-3">
-          <h4 className="text-right">Profile Settings</h4>
+          <h4 className="text-right">Profile</h4>
         </div>
         <div className="user-info">
           <div className="user-info-item">
@@ -83,12 +73,6 @@ export const VistaUser = () => {
             <label className="labels white-text">Postcode:</label>
             <div className="white-bg">{userRdx.address.zipcode}</div>
           </div>
-          <div className="user-info-item">
-            <label className="labels white-text">id:</label>
-            <div id="idUser" className="white-bg">
-              {userRdx.id}
-            </div>
-          </div>
         </div>
         <div className="mt-5 text-center m-1 ">
           <Button variant="outline-dark" onClick={handleShow}>
@@ -97,14 +81,14 @@ export const VistaUser = () => {
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Thanks you, for your purchase</Modal.Title>
+              <Modal.Title>{orders.filter((order: IOrder) => order.user.id === loggedUserId).length > 0 ? "Thanks you, for your purchase:" : "No orders yet"}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div>
-                <p> Your orders:</p>
+                <p>{orders.filter((order: IOrder) => order.user.id === loggedUserId).length > 0 ? "Your orders:" : "😔"}</p>
                 <ul>
                   {orders
-                    .filter((order) => order.user.id === loggedUserId)
+                    .filter((order: IOrder) => order.user.id === loggedUserId)
                     .map((order, i) => (
                       <div key={i}>
                         <li>
@@ -115,7 +99,14 @@ export const VistaUser = () => {
                             .map((item) => item.title)
                             .join(", ")}
                           <br />
-                          Total: {order.cart.montoTotal}
+                          Total: €{order.cart.montoTotal}
+                          <br />
+                          <span
+                            style={{
+                              color: order.isProcessed ? "green" : "red"
+                            }}>
+                            Status: {order.isProcessed ? "Processed" : "Not Processed"}
+                          </span>
                         </li>
                         <br />
                       </div>

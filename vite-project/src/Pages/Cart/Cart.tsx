@@ -23,7 +23,7 @@ import {
   updateProductAmount,
   removeProduct,
 } from "../../redux/cartSlice";
-import { Button } from "@mantine/core";
+
 import { registerOrder } from "../../Common/Services/OrderService";
 import { userData } from "../../redux/loginSlice";
 import { ModalBoton } from "../../Components/Modal/Modal";
@@ -53,7 +53,7 @@ export const Cart = () => {
   };
 
   return (
-    <section className="h-100 h-custom">
+    <section id="cart-section" className="h-100 h-custom">
       <MDBContainer className="py-5 h-100">
         {/* ARTICULOS */}
         <MDBRow className="justify-content-center align-items-center h-100">

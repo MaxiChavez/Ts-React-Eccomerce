@@ -1,17 +1,18 @@
-#granContainer {
-  //este es el  div del titulo
-}
-
 #todo {
   width: 45em;
   height: auto;
   background-color: white;
   margin-bottom: 2em !important;
   margin: 0 auto;
+  margin-top: 4%;
   border-radius: 15px;
   padding-bottom: 1em;
   max-width: 93%;
   transition: box-shadow 0.3s ease-in-out;
+}
+
+#detailSection {
+  min-height: calc(86vh);
 }
 
 #imagenDetalle {

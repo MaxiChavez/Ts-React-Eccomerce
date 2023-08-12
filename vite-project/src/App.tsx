@@ -6,9 +6,7 @@ import { Login } from "./Pages/Login/Login";
 import Detail from "./Pages/Detail/Detail";
 import { Cart } from "./Pages/Cart/Cart";
 import Footer from "./Common/Footer/Footer";
-
 import { VistaUser } from "./Pages/Usuarios/VistaUser/VistaUser";
-import { VistaAdmin } from "./Pages/Usuarios/VistaAdmin/VistaAdmin";
 
 function App() {
   return (
@@ -21,7 +19,6 @@ function App() {
           <Route path="detail" element={<Detail />} />
           <Route path="cart" element={<Cart />} />
           <Route path="user" element={<VistaUser />} />
-          <Route path="admin" element={<VistaAdmin />} />
         </Routes>
         <Footer />
       </BrowserRouter>

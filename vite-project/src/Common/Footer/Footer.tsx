@@ -1,6 +1,9 @@
 import "./Footer.css";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const location = useLocation();
+
   const isCartView = location.pathname === "/cart";
 
   if (isCartView) {

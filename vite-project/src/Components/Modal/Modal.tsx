@@ -2,14 +2,17 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { updateOrderProcessedStatus } from "../../Common/Services/OrderService";
 
 export const ModalBoton = ({
   buttonText,
-  deleteButtonText,
+  processButtonText,
   modalText,
   buttonVariant,
   showDeleteButton = true,
   onCloseClick,
+  orderId,
+  isProcessed = false
 }) => {
   const [show, setShow] = useState(false);
 
@@ -21,11 +24,17 @@ export const ModalBoton = ({
   };
 
   const handleShow = () => setShow(true);
+  const handleProccess = (orderId: number) => {
+    console.log(orderId)
+    updateOrderProcessedStatus(orderId)
+    handleClose()
+    window.location.reload();
+  };
 
   return (
     <>
-      <Button variant={buttonVariant} onClick={handleShow}>
-        {buttonText}
+      <Button variant={buttonVariant} onClick={handleShow} >
+        {isProcessed ? "Order Processed" : buttonText}
       </Button>
 
       <Modal
@@ -42,9 +51,9 @@ export const ModalBoton = ({
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          {showDeleteButton && (
-            <Button variant="danger" onClick={handleClose}>
-              {deleteButtonText}
+          {showDeleteButton && processButtonText !== "" && (
+            <Button variant="primary" onClick={() => handleProccess(orderId)} disabled={isProcessed}>
+              {processButtonText}
             </Button>
           )}
         </Modal.Footer>

@@ -16,6 +16,7 @@ export interface IUserData {
 }
 
 export interface IUserOrder {
+  id: number;
   name: string;
   email: string;
   phone: string;

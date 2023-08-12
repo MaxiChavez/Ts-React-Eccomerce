@@ -37,6 +37,7 @@ const cartSlice = createSlice({
     addToCart: (state, action: PayloadAction<IProductoCarrito>) => {
       const newItem = action.payload;
       const existeElItem = state.items.find((item) => item.id === newItem.id);
+      console.log(existeElItem?.amount)
       if (existeElItem) {
         existeElItem.amount += newItem.amount;
       } else {

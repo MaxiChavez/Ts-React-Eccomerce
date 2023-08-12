@@ -9,15 +9,24 @@ import { categoryData } from "../../redux/categorySlice";
 
 import "./Home.css";
 import { searchData } from "../../redux/searchSlice";
+import { loginData } from "../../redux/loginSlice";
+import { IUserData } from "../../Common/Services/IUserInterface";
+import { useNavigate } from "react-router-dom";
+import { VistaAdmin } from "../Usuarios/VistaAdmin/VistaAdmin";
 
 interface Category {
   description: string;
 }
 
 const Home = () => {
+  const navigate = useNavigate();
   //Traigo la información de la búsqueda desde el estado de Redux
   const categoryRdx: Category = useSelector(categoryData);
   const searchRdx: string = useSelector(searchData);
+
+
+  const userLogRd: { user: IUserData } = useSelector(loginData);
+  console.log(userLogRd)
 
   //variables de estado
   const [productos, setProductos] = useState<IProduct[]>([]);
@@ -26,8 +35,8 @@ const Home = () => {
     categoryRdx.description === "0" || categoryRdx.description === undefined
       ? productos
       : productos.filter(
-          (producto) => producto.category === categoryRdx.description
-        );
+        (producto) => producto.category === categoryRdx.description
+      );
 
   useEffect(() => {
     const traerLosProductos = async () => {
@@ -45,23 +54,30 @@ const Home = () => {
     traerLosProductos();
   }, [searchRdx]);
 
-  return (
-    <div>
-      <div className="card-section">
-        {productosFiltrados.map((producto: IProduct) => (
-          <CartaProducto
-            key={producto.id}
-            title={producto.title}
-            id={producto.id}
-            category={producto.category}
-            description={producto.description}
-            price={`Price: $ ${producto.price}`}
-            image={producto.image}
-          />
-        ))}
+  if (userLogRd.user.rol === "a") {
+    return (
+      <VistaAdmin></VistaAdmin>
+    )
+  }
+  else {
+    return (
+      <div>
+        <div className="card-section">
+          {productosFiltrados.map((producto: IProduct) => (
+            <CartaProducto
+              key={producto.id}
+              title={producto.title}
+              id={producto.id}
+              category={producto.category}
+              description={producto.description}
+              price={`Price: $ ${producto.price}`}
+              image={producto.image}
+            />
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default Home;

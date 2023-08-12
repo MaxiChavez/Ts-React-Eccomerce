@@ -4,21 +4,12 @@
   padding: 1em;
   align-items: center;
   justify-content: center;
-  /* -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  transition: transform 0.3s ease; */
 }
-
-/* .card:hover {
-  transform: scale(1.05);
-
-  transition: transform 0.3s ease-in-out;
-} */
 
 .card:hover {
   box-shadow: 0 0 18px rgb(186, 193, 190) !important;
 }
+
 
 .card-section {
   padding: 5em;
@@ -39,5 +30,4 @@
   justify-content: center !important;
 }
 
-@media screen {
-}
+@media screen {}
