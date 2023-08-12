@@ -69,7 +69,7 @@ El proyecto busca brindar una experiencia interactiva y atractiva para los usuar
 Home
 <img src="./vite-project/src/assets/Home.png">
 Home Responsive
-<img src="./vite-project/src/assets/card-responsive.png">  
+<img src="./vite-project/src/assets/Carta-responsive.png">s
 Login
 <img src="./vite-project/src/assets/Login.png">
 Login Responsive
@@ -82,10 +82,8 @@ Carrito de compras
 <img src="./vite-project/src/assets/Compra%20Cart.png">
 Ordenes Admin
 <img src="./vite-project/src/assets/Admin-vista.png">
-
 Detail
 <img src="./vite-project/src/assets/Detail.png">
-
 User perfil
 <img src="./vite-project/src/assets/Perfil%20usuario.png">
 User perfil
