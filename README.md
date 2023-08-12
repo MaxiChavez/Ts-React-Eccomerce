@@ -67,31 +67,28 @@ El proyecto busca brindar una experiencia interactiva y atractiva para los usuar
 ## Vistas
 
 Home
-<img src="./vite-project/src/assets/Home-Ecom.png">
+<img src="./vite-project/src/assets/Home.png">
 Home Responsive
-<img src="./vite-project/src/assets/Home-Responsive.png">  
+<img src="./vite-project/src/assets/card-responsive.png">  
 Login
-<img src="./vite-project/src/assets/Login-ecom.png">
+<img src="./vite-project/src/assets/Login.png">
 Login Responsive
-<img src="./vite-project/src/assets/Login-Responsive.png">
+<img src="./vite-project/src/assets/Login%20responsive.png">
 Profile
-<img src="./vite-project/src/assets/User-Profile.png">
+<img src="./vite-project/src/assets/Perfil%20usuario.png">
 Admin responsive
-<img src="./vite-project/src/assets/Admin-Responsive.png">  
-Buscador
-<img src="./vite-project/src/assets/Buscador-ecom.png">
+<img src="./vite-project/src/assets/Admin%20Responsive.png">  
 Carrito de compras
-<img src="./vite-project/src/assets/Cart-User.png">
-Card responsive
-<img src="./vite-project/src/assets/Card-Responsive.png">
+<img src="./vite-project/src/assets/Compra%20Cart.png">
 Detail
-<img src="./vite-project/src/assets/Detail-ecom.png">
+<img src="./vite-project/src/assets/Detail.png">
 Ordenes Admin
-<img src="./vite-project/src/assets/Order-Admin.png">
-Ordenes User
-<img src="./vite-project/src/assets/Ordenes-user.png">
+<img src="./vite-project/src/assets/Admin.png>
+
 User perfil
-<img src="./vite-project/src/assets/User-Profile.png">
+<img src="./vite-project/src/assets/Perfil%20usuario.png">
+User perfil
+<img src="./vite-project/src/assets/Ordenes%20Usuario.png">
 
 ## Futuras funcionalidades
 
