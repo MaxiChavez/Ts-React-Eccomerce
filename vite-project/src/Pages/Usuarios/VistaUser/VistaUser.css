@@ -1,33 +1,14 @@
-/* .userDiv {
-  font-size: 22px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center !important;
-  justify-content: center !important;
-  color: white !important;
-  background-color: #333;
-  margin-bottom: 1em;
-  margin-top: 1em;
-  border-radius: 12px;
-}
-.user-info-item {
-  background-color: white; 
-  padding: 8px; 
-  margin-bottom: 10px; 
-  border-radius: 4px; 
-  color: black;
-} */
-/* VistaUser.css */
-
 .userDiv {
-  background-color: white; /* Fondo blanco */
+  background-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 1em;
-  margin-bottom: 1em;
-
+  margin-top: 1em !important;
+  margin-bottom: 3em !important;
+  margin: 0 auto;
+  width: 30em;
+  height: 45em;
   align-items: center;
+  max-width: 95%;
 }
 
 .labels {
@@ -36,15 +17,19 @@
 }
 
 .white-text {
-  color: black; /* Texto blanco */
+  color: black;
 }
 
 .white-bg {
-  background-color: white; /* Fondo blanco */
+  background-color: white;
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #ddd;
 }
 .profile-button {
   margin-right: 10px;
+}
+
+.profile-button {
+  margin: 1em;
 }

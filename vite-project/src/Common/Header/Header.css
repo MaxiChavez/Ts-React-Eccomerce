@@ -1,6 +1,5 @@
 #navbar {
   background-color: #ffffff !important;
-  align-items: baseline !important;
   vertical-align: middle !important;
 }
 .navbar-brand {
@@ -18,62 +17,6 @@ basic-nav-dropdown {
   padding: 5px !important;
 }
 
-#btn-cart {
-  width: 6em;
-  height: 2.45em !important;
-  margin-bottom: 0;
-  padding-bottom: 1px !important;
-  align-items: center;
-  /* margin-left: 1px !important; */
-  display: flex;
-  justify-content: center;
-}
-
-#btn-cart svg {
-  margin-top: -2px;
-}
-
-.mx-4 {
-  height: 2.5em;
-  padding: 0;
-  margin: 0;
-}
-.mt-2 {
-  padding-bottom: 1px !important;
-  height: 2.45em !important;
-}
-
-.form-select {
-  width: 15em !important;
-  align-items: baseline !important;
-}
-#logincart {
-  display: flex;
-  align-items: center;
-  vertical-align: baseline !important;
-}
-.buttons-container {
-  display: flex;
-  align-items: center;
-  gap: 5px !important;
-}
-.d-flex {
-  align-items: baseline !important;
-}
-
-.navbar-expand-lg .navbar-collapse {
-  display: flex !important;
-  flex-basis: auto;
-  align-items: baseline;
-}
-
-#Searchh {
-  display: flex !important;
-  justify-content: center !important;
-  margin: 0;
-  padding: 0;
-}
-.mx-2 {
-  margin-right: 0.5rem !important;
-  margin-left: 0;
+#categories {
+  margin-left: 4em !important;
 }

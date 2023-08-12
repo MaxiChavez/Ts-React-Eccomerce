@@ -2,8 +2,8 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer className="footer-container">
-      <div className="developed-by">Desarrollado por:</div>
+    <footer id="footer" className="footer-container">
+      <div className="container-fluid">Desarrollado por:</div>
     </footer>
   );
 };

@@ -49,7 +49,7 @@ export const VistaUser = () => {
   }, []);
 
   return (
-    <div id="userDiv" className="col-md-5 border-right ">
+    <div id="userDiv" className="mx-auto border-right ">
       <div className="p-3 py-5 userDiv">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h4 className="text-right">Profile Settings</h4>
@@ -75,17 +75,19 @@ export const VistaUser = () => {
             <label className="labels white-text">Address street:</label>
             <div className="white-bg">{userRdx.address.street}</div>
           </div>
-          <div className="user-info-item">
+          {/* <div className="user-info-item">
             <label className="labels white-text">Address number:</label>
             <div className="white-bg">{userRdx.address.number}</div>
-          </div>
+          </div> */}
           <div className="user-info-item">
             <label className="labels white-text">Postcode:</label>
             <div className="white-bg">{userRdx.address.zipcode}</div>
           </div>
           <div className="user-info-item">
             <label className="labels white-text">id:</label>
-            <div className="white-bg">{userRdx.id}</div>
+            <div id="idUser" className="white-bg">
+              {userRdx.id}
+            </div>
           </div>
         </div>
         <div className="mt-5 text-center m-1 ">
