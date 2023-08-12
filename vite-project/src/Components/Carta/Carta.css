@@ -1,21 +1,23 @@
-
 .card {
   height: 35em !important;
   width: 18em !important;
   padding: 1em;
   align-items: center;
   justify-content: center;
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  /* -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease; */
 }
 
-.card:hover {
+/* .card:hover {
   transform: scale(1.05);
-  /* Aumenta la escala al 105% en el hover */
-  transition: transform 0.3s ease;
-  /* Agrega una transición suave de 0.3 segundos */
+
+  transition: transform 0.3s ease-in-out;
+} */
+
+.card:hover {
+  box-shadow: 0 0 18px rgb(186, 193, 190) !important;
 }
 
 .card-section {
@@ -30,10 +32,12 @@
 }
 
 .card-body {
-  padding: 1em !important;
+  padding: 2em !important;
+  padding-bottom: 1em !important;
   margin: 0 !important;
-  align-items: center;
-  justify-content: center;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-@media screen {}
+@media screen {
+}

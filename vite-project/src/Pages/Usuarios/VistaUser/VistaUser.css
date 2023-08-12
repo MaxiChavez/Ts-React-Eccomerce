@@ -9,8 +9,11 @@
   height: 45em;
   align-items: center;
   max-width: 95%;
+  transition: box-shadow 0.3s ease-in-out;
 }
-
+.userDiv:hover {
+  box-shadow: 0 0 18px rgb(186, 193, 190) !important;
+}
 .labels {
   font-weight: bold;
   margin-bottom: 5px;

@@ -1,4 +1,4 @@
-.content {
+/* .content {
   flex: 1;
 }
 
@@ -8,7 +8,34 @@
   text-align: center;
 }
 
+
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 10px; 
+  text-align: center;
+} */
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  text-align: center;
+}
+.container {
+  flex: 1;
+}
+
 .developed-by {
   color: #000;
   font-size: 14px;
+}
+.footer-container {
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
 }

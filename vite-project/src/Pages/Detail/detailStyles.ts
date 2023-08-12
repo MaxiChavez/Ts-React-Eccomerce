@@ -37,16 +37,23 @@ const useStyles = createStyles((theme) => ({
   },
 
   image: {
-    flex: 1,
-    maxWidth: "100%",
+    width: "100%", // Cambiar maxWidth a width
     height: "auto",
-
-    [theme.breakpoints.md]: {
-      display: "block",
-      margin: "0 auto",
-      maxWidth: "80%",
-    },
+    margin: "0 auto", // Mantener el margen para centrar
+    display: "block", // Mantener display en block para ajustar el ancho automáticamente
   },
+ 
+  // image: {
+  //   flex: 1,
+  //   maxWidth: "100%",
+  //   height: "auto",
+
+  //   [theme.breakpoints.md]: {
+  //     display: "block",
+  //     margin: "0 auto",
+  //     maxWidth: "100%",
+  //   },
+  // },
 }));
 
 export default useStyles;

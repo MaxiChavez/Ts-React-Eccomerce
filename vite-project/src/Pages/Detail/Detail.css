@@ -1,3 +1,28 @@
+#granContainer {
+  //este es el  div del titulo
+}
+
+#todo {
+  width: 45em;
+  height: auto;
+  background-color: white;
+  margin-bottom: 2em !important;
+  margin: 0 auto;
+  border-radius: 15px;
+  padding-bottom: 1em;
+  max-width: 93%;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
 #imagenDetalle {
-  border-radius: 10px;
+  width: 20em;
+  height: 30em;
+}
+
+#todo:hover {
+  box-shadow: 0 0 18px rgb(186, 193, 190);
+}
+
+h1 {
+  text-decoration: underline black;
 }
