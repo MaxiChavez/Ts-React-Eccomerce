@@ -222,7 +222,7 @@ export const Login = (props: PaperProps) => {
             <TextInput
               required
               label="Email"
-              placeholder="hello@mantine.dev"
+              placeholder="Email"
               value={form.values.email}
               onChange={(event) =>
                 form.setFieldValue("email", event.currentTarget.value)
