@@ -1,22 +1,7 @@
 #navbar {
   background-color: #ffffff !important;
-  vertical-align: middle !important;
+  width: 100vw;
 }
 .navbar-brand {
-  cursor: pointer;
-}
-
-basic-nav-dropdown {
-  border: solid !important;
-  border-color: black !important;
-}
-.nav-link {
-  border: solid 1px !important;
-  border-color: black !important;
-  border-radius: 5px;
-  padding: 5px !important;
-}
-
-#categories {
-  margin-left: 4em !important;
+  cursor: pointer !important;
 }

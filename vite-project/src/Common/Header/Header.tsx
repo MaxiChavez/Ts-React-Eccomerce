@@ -180,7 +180,7 @@
 
 // export default Header;
 
-import React, { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { fetchCategorias } from "../../Common/Services/apicalls";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
@@ -197,6 +197,7 @@ import { loginData } from "../../redux/loginSlice";
 import { IUserData } from "../Services/IUserInterface";
 import { cartTotalQuantity } from "../../redux/cartSlice";
 import { NavDropdown } from "react-bootstrap";
+import "./Header.css";
 
 interface Category {
   description: string;
@@ -256,7 +257,7 @@ const Header = () => {
     <div>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
-          <Navbar.Brand onClick={() => navigate("/")}>
+          <Navbar.Brand id="marca" onClick={() => navigate("/")}>
             ChicBoutique
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
