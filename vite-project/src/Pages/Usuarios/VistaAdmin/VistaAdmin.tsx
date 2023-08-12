@@ -1,3 +1,4 @@
+import "./VistaAdmin.css";
 import Table from "react-bootstrap/Table";
 import { ModalBoton } from "../../../Components/Modal/Modal";
 import { useEffect, useState } from "react";
