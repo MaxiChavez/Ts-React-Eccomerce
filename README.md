@@ -80,10 +80,11 @@ Admin responsive
 <img src="./vite-project/src/assets/Admin%20Responsive.png">  
 Carrito de compras
 <img src="./vite-project/src/assets/Compra%20Cart.png">
-Detail
-<img src="./vite-project/src/assets/Detail.png">
 Ordenes Admin
 <img src="./vite-project/src/assets/Admin.png>
+
+Detail
+<img src="./vite-project/src/assets/Detail.png">
 
 User perfil
 <img src="./vite-project/src/assets/Perfil%20usuario.png">
