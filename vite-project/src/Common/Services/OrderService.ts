@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ICartState } from "../Interfaces/Productos";
 import { IUserData, IUserOrder } from "./IUserInterface";
-const baseUrl = "http://localhost:3000/";
+const baseUrl = "https://jsonapitemplate.vercel.app/";
 
 interface IOrder {
   cart: ICartState;
