@@ -1,23 +1,23 @@
-import "./VistaAdmin.css";
+import { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import { ModalBoton } from "../../../Components/Modal/Modal";
-import { useEffect, useState } from "react";
 import { getOrders } from "../../../Common/Services/OrderService";
 import { loginData } from "../../../redux/loginSlice";
 import { useSelector } from "react-redux";
 import { IUserData } from "../../../Common/Services/IUserInterface";
+import "./VistaAdmin.css";
 
 export const VistaAdmin = () => {
-  const userLogRd: { user: IUserData } = useSelector(loginData);
-  const [orders, setOrders] = useState([]);
+  const userLogRd = useSelector(loginData) as { user: IUserData };
+  const [orders, setOrders] = useState<any[]>([]);
 
   const fetchOrdersAdmin = async () => {
     try {
       const ordersData = await getOrders();
       setOrders(ordersData);
-      console.log("son las ordenes de amind???:", ordersData);
+      console.log("son las ordenes de admin:", ordersData);
     } catch (error) {
-      console.log("erorr:", error);
+      console.log("error:", error);
     }
   };
 
@@ -30,7 +30,7 @@ export const VistaAdmin = () => {
       <Table id="tablaAdmin" striped bordered hover>
         <thead>
           <tr>
-            <th>Hi, {userLogRd.user.name}</th>
+            <th>Hi, {userLogRd.user?.name}</th>
             <th>Customer name</th>
             <th>id</th>
             <th>Pedido</th>
@@ -40,50 +40,44 @@ export const VistaAdmin = () => {
           {orders.map((order) => (
             <tr key={order.id}>
               <td>Order: {order.id}</td>
-              <td>{order.user.name}</td>
+              <td>{order.user?.name}</td>
               <td>{order.id}</td>
-
               <td>
                 <ModalBoton
                   buttonText="View order"
                   processButtonText="Process Order"
                   orderId={order.id}
-                  modalText={
-                    <div>
-                      {order.cart.items.length > 0 && (
-                        <div>
-                          Items:
-                          <br />
-                          {order.cart.items.map((item, index) => (
-                            <span key={index}>
-                              ({item.amount}) {item.title}
-                              <br />
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                      <br />
-                      {order.user && (
-                        <div>
-                          Address: <br />
-                          City:{order.user.address.city}
-                          <br />
-                          Street:{order.user.address.street}
-                          <br />
-                          number:{order.user.address.number}
-                          <br />
-                          Zipcode: {order.user.address.zipcode}
-                          <br />
-                        </div>
-                      )}
-                      {order.cart.montoTotal && (
-                        <div>
-                          <br />
-                          Total: {order.cart.montoTotal}
-                        </div>
-                      )}
-                    </div>
-                  }
+                  modalText={`
+                    ${
+                      order.cart.items.length > 0
+                        ? `Items:\n${order.cart.items
+                            .map(
+                              (item: any) => `(${item.amount}) ${item.title}\n`
+                            )
+                            .join("")}`
+                        : ""
+                    }
+                    
+                    ${
+                      order.user && order.user.address
+                        ? `Address:\nCity: ${
+                            order.user.address.city || "Unknown"
+                          }\nStreet: ${
+                            order.user.address.street || "Unknown"
+                          }\nnumber: ${
+                            order.user.address.number || "Unknown"
+                          }\nZipcode: ${
+                            order.user.address.zipcode || "Unknown"
+                          }\n`
+                        : ""
+                    }
+                    
+                    ${
+                      order.cart.montoTotal
+                        ? `\nTotal: ${order.cart.montoTotal}`
+                        : ""
+                    }
+                    `}
                   buttonVariant={order.isProcessed ? "success" : "primary"}
                   isProcessed={order.isProcessed}
                   onCloseClick={() => {}}

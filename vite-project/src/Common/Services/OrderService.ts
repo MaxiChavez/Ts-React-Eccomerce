@@ -1,29 +1,33 @@
 import axios from "axios";
 import { ICartState } from "../Interfaces/Productos";
-import { IUserData, IUserOrder} from "./IUserInterface";
+import { IUserData, IUserOrder } from "./IUserInterface";
 const baseUrl = "http://localhost:3000/";
 
 interface IOrder {
-    cart : ICartState,
-    user : IUserOrder,
-    isProcessed : boolean
+  cart: ICartState;
+  user: IUserOrder;
+  isProcessed: boolean;
 }
 
-export const registerOrder = async (ordenCarrito: ICartState, usuario: IUserData): Promise<any> => {
-    const userOrder: IUserOrder = {
-        name: usuario.name,
-        email: usuario.email,
-        phone: usuario.phone,
-        adress: usuario.adress,
-    };
+export const registerOrder = async (
+  ordenCarrito: ICartState,
+  usuario: IUserData
+): Promise<any> => {
+  const userOrder: IUserOrder = {
+    name: usuario.name,
+    email: usuario.email,
+    phone: usuario.phone,
+    adress: usuario.adress,
+    id: usuario.id,
+  };
 
-    const order : IOrder = {
-        cart : ordenCarrito,
-        user : usuario,
-        isProcessed : false
-    }
+  const order: IOrder = {
+    cart: ordenCarrito,
+    user: userOrder,
+    isProcessed: false,
+  };
 
-    axios
+  axios
     .post(`${baseUrl}orders`, order)
     .then((response) => {
       console.log("Nueva orden agregada:", response.data);
@@ -34,26 +38,22 @@ export const registerOrder = async (ordenCarrito: ICartState, usuario: IUserData
 };
 
 export const getOrders = async (): Promise<any> => {
-    try
-    {
-        const response = await axios.get(`${baseUrl}orders`);
-        return response.data;
-    }
-    catch (error) 
-    {
-        console.error(error);
-        return false;
-    }
+  try {
+    const response = await axios.get(`${baseUrl}orders`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 };
 
-export const updateOrderProcessedStatus = async (orderId:number) => {
-    try {
-      const response = await axios.patch(`${baseUrl}orders/${orderId}`, {
-        isProcessed: true
-      });
-      return response.data;
-    } catch (error) {
-        console.error("Error al procesar la orden", error);
-    }
+export const updateOrderProcessedStatus = async (orderId: number) => {
+  try {
+    const response = await axios.patch(`${baseUrl}orders/${orderId}`, {
+      isProcessed: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error al procesar la orden", error);
+  }
 };
-

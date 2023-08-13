@@ -19,7 +19,9 @@ export const fetchCategorias = async () => {
 export const fetchProductsBySearch = async (searchTerm: string) => {
   const response = await fetch(`https://fakestoreapi.com/products`);
   const results: IProduct[] = await response.json();
-  const searchTermLowercase: string = searchTerm.search.toLowerCase();
+  const searchTermLowercase: string = searchTerm.search
+    .toString()
+    .toLowerCase();
   const filteredResults = results.filter((product) => {
     return product.title.toLowerCase().includes(searchTermLowercase);
   });

@@ -19,14 +19,12 @@ interface Category {
 }
 
 const Home = () => {
-  const navigate = useNavigate();
   //Traigo la información de la búsqueda desde el estado de Redux
   const categoryRdx: Category = useSelector(categoryData);
   const searchRdx: string = useSelector(searchData);
 
-
   const userLogRd: { user: IUserData } = useSelector(loginData);
-  console.log(userLogRd)
+  console.log(userLogRd);
 
   //variables de estado
   const [productos, setProductos] = useState<IProduct[]>([]);
@@ -35,8 +33,8 @@ const Home = () => {
     categoryRdx.description === "0" || categoryRdx.description === undefined
       ? productos
       : productos.filter(
-        (producto) => producto.category === categoryRdx.description
-      );
+          (producto) => producto.category === categoryRdx.description
+        );
 
   useEffect(() => {
     const traerLosProductos = async () => {
@@ -55,11 +53,8 @@ const Home = () => {
   }, [searchRdx]);
 
   if (userLogRd.user.rol === "a") {
-    return (
-      <VistaAdmin></VistaAdmin>
-    )
-  }
-  else {
+    return <VistaAdmin></VistaAdmin>;
+  } else {
     return (
       <div>
         <div className="card-section">

@@ -77,7 +77,6 @@ export const Cart = () => {
                         <div className="d-flex align-items-center">
                           <img
                             src={item.image}
-                            fluid
                             className="rounded-3"
                             style={{ width: "120px" }}
                             alt="Book"

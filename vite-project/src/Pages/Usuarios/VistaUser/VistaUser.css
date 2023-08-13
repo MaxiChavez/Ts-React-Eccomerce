@@ -1,15 +1,16 @@
-.userDiv {
+#userDiv {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   margin-top: 1em !important;
-  margin-bottom: 3em !important;
+  margin-bottom: 9em !important;
   margin: 0 auto;
   width: 30em;
   height: 45em;
   align-items: center;
   max-width: 95%;
   transition: box-shadow 0.3s ease-in-out;
+  max-height: 95% !important;
 }
 
 .userDiv:hover {
