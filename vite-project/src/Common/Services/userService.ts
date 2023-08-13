@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ILoginData, IUserData } from "./IUserInterface";
-const baseUrl = "https://jsonapitemplate.vercel.app/";
+const baseUrl = "https://jsonapitemplate-2l15v6eoh-maxichavez.vercel.app/";
 
 export const loginUser = async (loginData: ILoginData): Promise<any> => {
   console.log(loginData);
