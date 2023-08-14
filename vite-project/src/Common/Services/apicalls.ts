@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IProduct } from "./IProduct";
 
 const urlBase = "https://fakestoreapi.com/";
 const URL = "https://fakestoreapi.com/products/";
@@ -20,6 +21,17 @@ export const fetchCategorias = async () => {
   return results;
 };
 
+// export const fetchProductsBySearch = async (searchTerm: string) => {
+//   const response = await fetch(`https://fakestoreapi.com/products`);
+//   const results: IProduct[] = await response.json();
+//   const searchTermLowercase: string = searchTerm.search
+//     .toString()
+//     .toLowerCase();
+//   const filteredResults = results.filter((product) => {
+//     return product.title.toLowerCase().includes(searchTermLowercase);
+//   });
+//   return filteredResults;
+// };
 export const fetchProductsBySearch = async (searchTerm: string) => {
   const response = await fetch(`https://fakestoreapi.com/products`);
   const results: IProduct[] = await response.json();

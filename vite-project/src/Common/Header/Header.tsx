@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useDebounce } from "use-debounce";
+// import { useDebounce } from "use-debounce";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../../redux/categorySlice";
 import { addSearch } from "../../redux/searchSlice";
@@ -15,6 +15,7 @@ import { loginData } from "../../redux/loginSlice";
 import { IUserData } from "../Services/IUserInterface";
 import { cartTotalQuantity } from "../../redux/cartSlice";
 import { NavDropdown } from "react-bootstrap";
+import { IProduct } from "../Services/IProduct";
 import "./Header.css";
 
 interface Category {
@@ -27,7 +28,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [categorias, setCategorias] = useState<string[]>([]);
   const [search, setSearch] = useState<string>("");
-  const [debouncedSearch] = useDebounce(search, 1000);
+  // const [debouncedSearch] = useDebounce(search, 1000);
   const isLogged: boolean = useSelector(estaLogueado);
 
   const dispatch = useDispatch();
@@ -60,16 +61,16 @@ const Header = () => {
     traerLosProductos();
   }, [location.pathname]);
 
-  useEffect(() => {
-    const buscarProductos = async () => {
-      try {
-        dispatch(addSearch({ search: debouncedSearch }));
-      } catch (error) {
-        console.log("Error al buscar productos:", error);
-      }
-    };
-    buscarProductos();
-  }, [debouncedSearch]);
+  // useEffect(() => {
+  //   const buscarProductos = async () => {
+  //     try {
+  //       dispatch(addSearch({ search: debouncedSearch }));
+  //     } catch (error) {
+  //       console.log("Error al buscar productos:", error);
+  //     }
+  //   };
+  //   buscarProductos();
+  // }, [debouncedSearch]);
 
   return (
     <div>
@@ -103,7 +104,7 @@ const Header = () => {
                           target: {
                             value: "0",
                           },
-                        })
+                        } as ChangeEvent<HTMLSelectElement>)
                       }
                     >
                       All categories
@@ -114,7 +115,7 @@ const Header = () => {
                         onClick={() =>
                           handleCategoriaChange({
                             target: { value: categoria },
-                          })
+                          } as ChangeEvent<HTMLSelectElement>)
                         }
                       >
                         {categoria}
