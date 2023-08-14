@@ -3,6 +3,10 @@
   width: 100vw;
 }
 
+#nav:hover {
+  box-shadow: 0 0 35px rgb(252, 252, 252) !important;
+}
+
 .navbar-brand {
   cursor: pointer !important;
 }
