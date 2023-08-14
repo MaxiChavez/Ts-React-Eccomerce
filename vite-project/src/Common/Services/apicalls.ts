@@ -1,23 +1,23 @@
 import axios from "axios";
 
-const urlBase = "https://fakestoreapi.com/";
-const URL = "https://fakestoreapi.com/products/";
+// const urlBase = "https://fakestoreapi.com/";
+// const URL = "https://fakestoreapi.com/products/";
 
 export const fetchProducts = async () => {
-  const response = await axios.get(URL);
+  const response = await axios.get("/api/products");
   const results = response.data;
   return results;
 };
 
 export const fetchCategorias = async () => {
-  const response = await axios.get(`${urlBase}products/categories`);
+  const response = await axios.get("/api/products/categories");
   const results = response.data;
 
   return results;
 };
 
 export const fetchProductsBySearch = async (searchTerm: string) => {
-  const response = await fetch(`https://fakestoreapi.com/products`);
+  const response = await fetch("/api/products");
   const results: IProduct[] = await response.json();
   const searchTermLowercase: string = searchTerm.search
     .toString()
