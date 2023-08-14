@@ -4,9 +4,13 @@ import axios from "axios";
 // const URL = "https://fakestoreapi.com/products/";
 
 export const fetchProducts = async () => {
-  const response = await axios.get("/api/products");
-  const results = response.data;
-  return results;
+  try {
+    const response = await axios.get("/api/products");
+    const results = response.data;
+    return results;
+  } catch (error) {
+    console.log("se callo la api ", error);
+  }
 };
 
 export const fetchCategorias = async () => {
