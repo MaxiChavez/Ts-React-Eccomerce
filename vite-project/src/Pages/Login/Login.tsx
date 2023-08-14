@@ -48,7 +48,7 @@ export const Login = (props: PaperProps) => {
           console.log(userLogin);
           if (usuarioLogueado.length > 0) {
             console.log(usuarioLogueado[0]);
-            //PRIMERO GUARDO EL usuarioLogueado[1] EN REDUX:
+            //PRIMERO GUARDO EL usuarioLogueado 0 EN REDUX:
             const logedUser = usuarioLogueado[0];
             console.log(logedUser);
             dispatch(updateUser({ user: logedUser }));
