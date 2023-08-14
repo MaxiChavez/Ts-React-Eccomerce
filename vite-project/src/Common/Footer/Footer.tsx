@@ -15,7 +15,7 @@ const Footer = () => {
         {/* <div className="container-fluid"> */}
 
         <div className="container">
-          <div className="content">Desarrollado por: Maxi Chavez - 2023</div>
+          <div className="content">Developed by: Maxi Chavez - 2023</div>
         </div>
       </footer>
     );

@@ -137,8 +137,8 @@ export const Cart = () => {
               <MDBTableHead>
                 <tr>
                   <th scope="col" className="h5"></th>
-                  <th scope="col">PRECIO TOTAL</th>
-                  <th scope="col">CANTIDAD DE ARTICULOS</th>
+                  <th scope="col">TOTAL PRICE</th>
+                  <th scope="col">NUMBER OF ARTICLES</th>
                   <th scope="col" />
                 </tr>
               </MDBTableHead>
